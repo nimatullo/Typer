@@ -1,52 +1,63 @@
 package vowelcounter;
 
-import java.util.Scanner;
 import java.util.StringTokenizer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class CountVowel {
-    final private String VOWELS = "[^aeiouy]+";
+    final private String VOWELS = "[^aeiouy]{1,2}";
 
     private int count(String word) {
-        if (word.length() <= 1) {
+        word = word.toLowerCase();
+        if (word.length() == 0) {
+            return 0;
+        } else if (word.length() <= 2) {
             return 1;
         }
-        word = word.toLowerCase();
-        int counter = 0;
 
-        Pattern pattern = Pattern.compile(VOWELS, Pattern.MULTILINE);
-        Matcher matcher = pattern.matcher(word);
+        word = word.replaceFirst("^y", "");
 
-        while (matcher.find()) {
-            String currentLetter = matcher.group(0);
-            counter++;
-            if ((matcher.start() == (word.length()-1)) && (currentLetter.equals("e"))) {
-                counter--;
-            }
-            if (matcher.start() != word.length()-1) {
-                String nextLetter = Character.toString(word.charAt(matcher.end()));
-                if (nextLetter.equals(currentLetter)) {
-                    matcher.find();
-                    counter--;
-                }
-            }
-          }
+        String[] vowels = word.split(VOWELS);
+        if (vowels.length < 1) {
+            return 0;
+        }
+
+        int counter;
+        if (vowels[0].equals("")) {
+            counter = vowels.length - 1;
+        } else {
+            counter = vowels.length;
+        }
+        counter = silentE(word,counter);
+
+        if (counter == 0)
+            return 1;
         return counter;
     }
 
-    public void test(String word) {
-        String [] vowels = word.split(VOWELS);
-        for (String s : vowels)
-            System.out.print(s + " ");
-        System.out.println();
+    private int silentE(String word,int counter) {
+        if (word.charAt(word.length() - 1) == 'e') {
+            return --counter;
+        } else
+            return counter;
     }
 
     public int getSyllables(String s) {
         int count = 0;
-        StringTokenizer tokens = new StringTokenizer(s);
-        while (tokens.hasMoreTokens()) {
-            count += count(tokens.nextToken());
+        try {
+            StringTokenizer tokens = new StringTokenizer(s);
+            while (tokens.hasMoreTokens()) {
+                String token = tokens.nextToken().replaceAll("[^a-zA-Z0-9 ]","");
+                if (!token.matches("[a-zA-Z]*")) {
+                    count++;
+                }
+                else {
+                    count += count(token);
+                }
+                if (count == 245) {
+                    System.out.println("ok");
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            e.getMessage();
         }
         return count;
     }
