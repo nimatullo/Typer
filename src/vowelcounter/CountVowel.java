@@ -1,34 +1,28 @@
 package vowelcounter;
 
 import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CountVowel {
-    final private String VOWELS = "[^aeiouy]{1,2}";
+    final private String VOWELS = "[aeiouy]{1,2}";
 
     private int count(String word) {
         word = word.toLowerCase();
+        int counter = 0;
         if (word.length() == 0) {
             return 0;
-        } else if (word.length() <= 2) {
+        } else if(word.length() <= 2) {
             return 1;
         }
-
         word = word.replaceFirst("^y", "");
-
-        String[] vowels = word.split(VOWELS);
-        if (vowels.length < 1) {
-            return 0;
-        }
-
-        int counter;
-        if (vowels[0].equals("")) {
-            counter = vowels.length - 1;
-        } else {
-            counter = vowels.length;
+        Pattern pattern = Pattern.compile(VOWELS);
+        Matcher matcher = pattern.matcher(word);
+        while (matcher.find()) {
+            counter++;
         }
         counter = silentE(word,counter);
-
-        if (counter == 0)
+        if (counter ==0)
             return 1;
         return counter;
     }
@@ -40,24 +34,16 @@ public class CountVowel {
             return counter;
     }
 
+    public static boolean isVowel(char c) {
+        return "AEIOUaeiou".indexOf(c) != -1;
+    }
+
     public int getSyllables(String s) {
         int count = 0;
-        try {
-            StringTokenizer tokens = new StringTokenizer(s);
-            while (tokens.hasMoreTokens()) {
-                String token = tokens.nextToken().replaceAll("[^a-zA-Z0-9 ]","");
-                if (!token.matches("[a-zA-Z]*")) {
-                    count++;
-                }
-                else {
-                    count += count(token);
-                }
-                if (count == 245) {
-                    System.out.println("ok");
-                }
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            e.getMessage();
+        StringTokenizer tokens = new StringTokenizer(s);
+        while (tokens.hasMoreTokens()) {
+            String token = tokens.nextToken().replaceAll("[^a-zA-Z0-9 ]","");
+            count += count(token);
         }
         return count;
     }

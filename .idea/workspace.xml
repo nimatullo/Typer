@@ -2,10 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sample/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Typer/sample/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Typer/sample/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Typer/sample/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Typer/sample/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Typer/sample/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Typer/sample/sample.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Typer/vowelcounter/CountVowel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Typer/vowelcounter/CountVowel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Typer/vowelcounter/Demo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Typer/vowelcounter/Demo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/sample.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vowelcounter/CountVowel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vowelcounter/CountVowel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vowelcounter/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vowelcounter/Demo.java" afterDir="false" />
     </list>
@@ -97,6 +104,12 @@
     <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="false" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/sample" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -109,7 +122,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Demo">
+  <component name="RunManager" selected="Application.Main">
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -239,7 +252,8 @@
       <workItem from="1571979413488" duration="3844000" />
       <workItem from="1572049954415" duration="2930000" />
       <workItem from="1572055485480" duration="5024000" />
-      <workItem from="1572196456962" duration="10659000" />
+      <workItem from="1572196456962" duration="17158000" />
+      <workItem from="1572218104327" duration="770000" />
     </task>
     <servers />
   </component>
@@ -251,7 +265,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -264,10 +280,13 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/vowelcounter/CountVowel.java</url>
-          <line>55</line>
-          <option name="timeStamp" value="16" />
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/sample/Controller.java</url>
+          <line>99</line>
+          <properties class="sample.Controller" method="updateNumbers">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

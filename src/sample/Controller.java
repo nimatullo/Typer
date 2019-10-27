@@ -7,7 +7,9 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import org.fxmisc.richtext.InlineCssTextArea;
 import org.fxmisc.richtext.StyledTextArea;
 import vowelcounter.CountVowel;
 
@@ -17,11 +19,12 @@ import java.nio.file.Files;
 import java.util.Arrays;
 
 public class Controller {
-    @FXML StyledTextArea textArea;
+    @FXML InlineCssTextArea textArea;
     @FXML MenuItem newMenuItem;
     @FXML MenuItem openMenuItem;
     @FXML MenuBar menuBar;
     @FXML Label wordCountLabel;
+    @FXML Button changeColorButton;
     int wordCount = 0;
     PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
 
@@ -94,15 +97,22 @@ public class Controller {
         textArea.paste();
     }
 
-    public void wordCount(KeyEvent keyEvent) {
-        if (keyEvent.getText().matches("[\\sa-zA-Z*]")) {
-            pause.setOnFinished(e -> getWordCount());
-            pause.playFromStart();
-        }
+    public void updateNumbers(KeyEvent keyEvent) {
+        pause.setOnFinished(e -> getWordCount());
+        pause.playFromStart();
     }
 
     public void getSyllables(ActionEvent actionEvent) {
-        CountVowel cv = new CountVowel();
-        System.out.println(cv.getSyllables(textArea.getText()));
+        CountVowel countVowel = new CountVowel();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.initStyle(StageStyle.UTILITY);
+        alert.setTitle("Syllable Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("Your document has: " + countVowel.getSyllables(textArea.getText()) + " syllables.");
+        alert.showAndWait();
+    }
+
+    public void changeColor(ActionEvent actionEvent) {
+        textArea.setStyle(0, textArea.getText().length(), "-fx-fill: red;");
     }
 }
