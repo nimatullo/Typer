@@ -39,6 +39,8 @@
                      <items>
                         <CheckMenuItem fx:id="wordCountMenuItem" mnemonicParsing="false" onAction="#showWordCount" text="Word Counter" />
                         <CheckMenuItem fx:id="syllableCountMenuItem" mnemonicParsing="false" onAction="#showSyllableCounter" text="Syllable Counter" />
+                        <CheckMenuItem fx:id="sentenceCountMenuItem" mnemonicParsing="false" onAction="#showSentenceCount" text="Sentence Counter" />
+                        <CheckMenuItem fx:id="fleschScoreMenuItem" mnemonicParsing="false" onAction="#showFleschScore" text="Flesch Score" />
                      </items>
                 </Menu>
               </menus>
@@ -58,6 +60,10 @@
             <Label fx:id="wordCountLabel" opacity="0.0" text="0" textFill="#3456ff" />
             <Label fx:id="syllableText" alignment="CENTER_RIGHT" contentDisplay="RIGHT" opacity="0.0" text="Syllable Count:" textAlignment="CENTER" underline="true" />
             <Label fx:id="syllableCountLabel" opacity="0.0" text="0" textFill="#3456ff" />
+            <Label fx:id="sentenceText" opacity="0.0" text="Sentence Count:" underline="true" />
+            <Label fx:id="sentenceCountLabel" opacity="0.0" text="0" textFill="#3456ff" />
+            <Label fx:id="fleschScoreText" opacity="0.0" text="Flesch Score:" underline="true" />
+            <Label fx:id="fleschScoreLabel" opacity="0.0" text="0" />
          </children>
          <padding>
             <Insets left="10.0" />

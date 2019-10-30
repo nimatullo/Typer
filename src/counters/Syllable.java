@@ -1,10 +1,10 @@
-package vowelcounter;
+package counters;
 
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CountVowel {
+public class Syllable {
     final private String VOWELS = "[aeiouy]{1,2}";
 
     private int count(String word) {

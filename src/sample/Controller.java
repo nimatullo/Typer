@@ -1,5 +1,8 @@
 package sample;
 
+import counters.FleschScore;
+import counters.Sentence;
+import counters.Word;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +13,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.fxmisc.richtext.InlineCssTextArea;
-import vowelcounter.CountVowel;
+import counters.Syllable;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -24,18 +27,27 @@ public class Controller {
     @FXML InlineCssTextArea textArea;
     @FXML MenuItem newMenuItem;
     @FXML MenuItem openMenuItem;
-    @FXML CheckMenuItem wordCountMenuItem;
-    @FXML CheckMenuItem syllableCountMenuItem;
     @FXML MenuBar menuBar;
+    @FXML CheckMenuItem wordCountMenuItem;
     @FXML Label wordCountLabel;
     @FXML Label wordCountText;
+    @FXML CheckMenuItem syllableCountMenuItem;
     @FXML Label syllableCountLabel;
     @FXML Label syllableText;
+    @FXML CheckMenuItem sentenceCountMenuItem;
+    @FXML Label sentenceCountLabel;
+    @FXML Label sentenceText;
+    @FXML CheckMenuItem fleschScoreMenuItem;
+    @FXML Label fleschScoreLabel;
+    @FXML Label fleschScoreText;
     @FXML ColorPicker colorPicker;
     @FXML Spinner<Integer> fontSizeSpinner;
-    int wordCount = 0;
+
+    int syllableCount = 0; int wordCount = 0; int sentenceCount = 0; double fleschScore = 0;
     PauseTransition pauseWordCount = new PauseTransition(Duration.seconds(0.5));
     PauseTransition pauseSyllableCount = new PauseTransition(Duration.seconds(0.5));
+    PauseTransition pauseSentenceCount = new PauseTransition(Duration.seconds(0.5));
+    PauseTransition pauseFleschScore = new PauseTransition(Duration.seconds(0.5));
 
     private void exit(Stage primaryStage) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit?", ButtonType.YES,
@@ -71,20 +83,12 @@ public class Controller {
             String fileString = new String(Files.readAllBytes(selectedFile.toPath()));
             textArea.replaceText(fileString);
             getWordCount();
+            getSentenceCount();
+            getSyllablesCount();
+            getFleschScore();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private void getWordCount() {
-        int counter = 0;
-        Pattern pattern = Pattern.compile("[a-zA-Z][\\s,.!?;:]");
-        Matcher matcher = pattern.matcher(textArea.getText());
-        while (matcher.find()) {
-            counter++;
-        }
-        wordCount = counter;
-        wordCountLabel.setText(Integer.toString(wordCount));
     }
 
     private void save(Stage primaryStage) {
@@ -136,15 +140,38 @@ public class Controller {
     }
 
     public void updateSyllables(KeyEvent keyEvent) {
-        pauseSyllableCount.setOnFinished(e -> getSyllables());
+        pauseSyllableCount.setOnFinished(e -> getSyllablesCount());
         pauseWordCount.setOnFinished(e -> getWordCount());
+        pauseSentenceCount.setOnFinished(e -> getSentenceCount());
+        pauseFleschScore.setOnFinished(e -> getFleschScore());
         pauseSyllableCount.playFromStart();
         pauseWordCount.playFromStart();
+        pauseSentenceCount.playFromStart();
+        pauseFleschScore.playFromStart();
     }
 
-    private void getSyllables() {
-        CountVowel countVowel = new CountVowel();
-        syllableCountLabel.setText(Integer.toString(countVowel.getSyllables(textArea.getText())));
+    private void getWordCount() {
+        Word word = new Word();
+        wordCount = word.getWordCount(textArea.getText());
+        wordCountLabel.setText(Integer.toString(wordCount));
+    }
+
+    private void getSentenceCount() {
+        Sentence sentence = new Sentence();
+        sentenceCount = sentence.getSentenceCount(textArea.getText());
+        sentenceCountLabel.setText(Integer.toString(sentenceCount));
+    }
+
+    private void getSyllablesCount() {
+        Syllable syllable = new Syllable();
+        syllableCount = syllable.getSyllables(textArea.getText());
+        syllableCountLabel.setText(Integer.toString(syllableCount));
+    }
+
+    private void getFleschScore() {
+        FleschScore fleschScoreDriver = new FleschScore();
+        fleschScore = fleschScoreDriver.getFleschScore(sentenceCount, syllableCount, wordCount);
+        fleschScoreLabel.setText(Double.toString(fleschScore));
     }
 
     public void changeColor(ActionEvent actionEvent) {
@@ -178,6 +205,28 @@ public class Controller {
         else {
             syllableCountLabel.setOpacity(0);
             syllableText.setOpacity(0);
+        }
+    }
+
+    public void showSentenceCount(ActionEvent actionEvent) {
+        if (sentenceCountMenuItem.isSelected()) {
+            sentenceCountLabel.setOpacity(1);
+            sentenceText.setOpacity(1);
+        }
+        else {
+            sentenceCountLabel.setOpacity(0);
+            sentenceText.setOpacity(0);
+        }
+    }
+
+    public void showFleschScore(ActionEvent actionEvent) {
+        if (fleschScoreMenuItem.isSelected()) {
+            fleschScoreLabel.setOpacity(1);
+            fleschScoreText.setOpacity(1);
+        }
+        else {
+            fleschScoreText.setOpacity(0);
+            fleschScoreLabel.setOpacity(0);
         }
     }
 }
