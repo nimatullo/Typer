@@ -1,3 +1,6 @@
-.red {
+#textArea {
+    -fx-font-size: 16px;
+}
+.textArea {
     -fx-fill: red;
 }

@@ -15,6 +15,10 @@ public class CountVowel {
         } else if(word.length() <= 2) {
             return 1;
         }
+        if(word.matches("(.*ing$)")) {
+            word = word.replaceAll("ing", "");
+            counter++;
+        }
         word = word.replaceFirst("^y", "");
         Pattern pattern = Pattern.compile(VOWELS);
         Matcher matcher = pattern.matcher(word);
@@ -22,7 +26,7 @@ public class CountVowel {
             counter++;
         }
         counter = silentE(word,counter);
-        if (counter ==0)
+        if (counter == 0)
             return 1;
         return counter;
     }
