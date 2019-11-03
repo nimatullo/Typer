@@ -38,10 +38,6 @@ public class Syllable {
             return counter;
     }
 
-    public static boolean isVowel(char c) {
-        return "AEIOUaeiou".indexOf(c) != -1;
-    }
-
     public int getSyllables(String s) {
         int count = 0;
         StringTokenizer tokens = new StringTokenizer(s);

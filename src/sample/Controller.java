@@ -4,24 +4,34 @@ import counters.FleschScore;
 import counters.Sentence;
 import counters.Word;
 import javafx.animation.PauseTransition;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.util.Pair;
+import links.MasterLinkedList;
+import markov.Markov;
 import org.fxmisc.richtext.InlineCssTextArea;
 import counters.Syllable;
+import org.fxmisc.richtext.model.StyleSpan;
+import org.fxmisc.richtext.model.StyleSpans;
+import org.fxmisc.richtext.model.StyleSpansBuilder;
+import org.fxmisc.richtext.model.StyledDocument;
+import org.reactfx.Observable;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.time.format.TextStyle;
+import java.util.Optional;
 
 public class Controller {
     @FXML InlineCssTextArea textArea;
@@ -44,10 +54,7 @@ public class Controller {
     @FXML Spinner<Integer> fontSizeSpinner;
 
     int syllableCount = 0; int wordCount = 0; int sentenceCount = 0; double fleschScore = 0;
-    PauseTransition pauseWordCount = new PauseTransition(Duration.seconds(0.5));
-    PauseTransition pauseSyllableCount = new PauseTransition(Duration.seconds(0.5));
-    PauseTransition pauseSentenceCount = new PauseTransition(Duration.seconds(0.5));
-    PauseTransition pauseFleschScore = new PauseTransition(Duration.seconds(0.5));
+    PauseTransition waitForFinishedInput = new PauseTransition(Duration.seconds(0.5));
 
     private void exit(Stage primaryStage) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit?", ButtonType.YES,
@@ -82,10 +89,7 @@ public class Controller {
             File selectedFile = fileChooser.showOpenDialog(primaryStage);
             String fileString = new String(Files.readAllBytes(selectedFile.toPath()));
             textArea.replaceText(fileString);
-            getWordCount();
-            getSentenceCount();
-            getSyllablesCount();
-            getFleschScore();
+            updateStatusBarNumbers();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -139,15 +143,16 @@ public class Controller {
         save(primaryStage);
     }
 
-    public void updateSyllables(KeyEvent keyEvent) {
-        pauseSyllableCount.setOnFinished(e -> getSyllablesCount());
-        pauseWordCount.setOnFinished(e -> getWordCount());
-        pauseSentenceCount.setOnFinished(e -> getSentenceCount());
-        pauseFleschScore.setOnFinished(e -> getFleschScore());
-        pauseSyllableCount.playFromStart();
-        pauseWordCount.playFromStart();
-        pauseSentenceCount.playFromStart();
-        pauseFleschScore.playFromStart();
+    public void statusBarListener(KeyEvent keyEvent) {
+        waitForFinishedInput.setOnFinished(e -> updateStatusBarNumbers());
+        waitForFinishedInput.playFromStart();
+    }
+
+    public void updateStatusBarNumbers() {
+        getWordCount();
+        getSentenceCount();
+        getSyllablesCount();
+        getFleschScore();
     }
 
     private void getWordCount() {
@@ -175,15 +180,38 @@ public class Controller {
     }
 
     public void changeColor(ActionEvent actionEvent) {
+        IndexRange selection = textArea.getSelection();
         String color = colorPicker.getValue().toString();
         color = color.replaceAll("0x","");
-        textArea.setStyle(textArea.getSelection().getStart(), textArea.getSelection().getEnd(), "-fx-fill: #" + color +";");
+        String currentStyle = textArea.getDocument().getStyleAtPosition(selection.getEnd());
+
+        if (!currentStyle.contains("-fx-fill")) {
+            textArea.setStyle(selection.getStart(), selection.getEnd(), currentStyle + "-fx-fill: #" + color + ";");
+        } else {
+            textArea.setStyle(textArea.getSelection().getStart(), textArea.getSelection().getEnd(),
+                    changeColor(currentStyle, color));
+        }
+    }
+
+    private String changeColor(String style, String color) {
+        return style.replaceAll("(-fx-fill: #\\S+;)", "-fx-fill: #" + color + ";");
     }
 
     public void changeFont(MouseEvent mouseEvent) {
+        IndexRange selection = textArea.getSelection();
         int fontSize = fontSizeSpinner.getValue();
-        textArea.setStyle(textArea.getSelection().getStart(), textArea.getSelection().getEnd(),
-                "-fx-font-size: " + fontSize + "px;");
+        String currentStyle = textArea.getDocument().getStyleAtPosition(selection.getEnd());
+
+        if (!currentStyle.contains("-fx-font-size")) {
+            textArea.setStyle(selection.getStart(), selection.getEnd(), currentStyle + "-fx-font-size: " + fontSize + "px;");
+        } else {
+            textArea.setStyle(textArea.getSelection().getStart(), textArea.getSelection().getEnd(),
+                    changeFont(currentStyle, fontSize));
+        }
+    }
+
+    private String changeFont(String style, int fontSize) {
+        return style.replaceAll("(-fx-font-size: \\d+px;)", "-fx-font-size: " + fontSize + "px;");
     }
 
     public void showWordCount(ActionEvent actionEvent) {
@@ -227,6 +255,36 @@ public class Controller {
         else {
             fleschScoreText.setOpacity(0);
             fleschScoreLabel.setOpacity(0);
+        }
+    }
+
+    public void generateText(ActionEvent actionEvent) {
+        Dialog<Pair<File, Integer>> dialog = new Dialog<>();
+        dialog.setTitle("Markov Generator");
+        TextField fileField = new TextField();
+        fileField.setPromptText("File");
+        TextField words = new TextField();
+        words.setPromptText("Number of words");
+        TextField startingWord = new TextField();
+        startingWord.setPromptText("Starting Word");
+        ButtonType generateButton = new ButtonType("Generate Paragraph", ButtonBar.ButtonData.OK_DONE);
+        VBox vBox = new VBox(fileField, words, startingWord);
+        dialog.getDialogPane().getButtonTypes().add(generateButton);
+        dialog.getDialogPane().setContent(vBox);
+
+        fileField.setOnMouseClicked(e -> {
+            Stage primaryStage = (Stage) menuBar.getScene().getWindow();
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "...txt"));
+            File file = fileChooser.showOpenDialog(primaryStage);
+            fileField.setText(file.getPath());
+        });
+
+        Optional<Pair<File, Integer>> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            Markov markov = new Markov();
+            MasterLinkedList s = markov.parser(new File(fileField.getText()));
+            textArea.replaceText(s.generateParagraph(startingWord.getText(), Integer.parseInt(words.getText()) ));
         }
     }
 }
