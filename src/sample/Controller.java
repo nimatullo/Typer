@@ -2,9 +2,10 @@ package sample;
 
 import counters.FleschScore;
 import counters.Sentence;
+import counters.Syllable;
 import counters.Word;
 import javafx.animation.PauseTransition;
-import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -18,19 +19,12 @@ import javafx.util.Pair;
 import links.MasterLinkedList;
 import markov.Markov;
 import org.fxmisc.richtext.InlineCssTextArea;
-import counters.Syllable;
-import org.fxmisc.richtext.model.StyleSpan;
-import org.fxmisc.richtext.model.StyleSpans;
-import org.fxmisc.richtext.model.StyleSpansBuilder;
-import org.fxmisc.richtext.model.StyledDocument;
-import org.reactfx.Observable;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.time.format.TextStyle;
 import java.util.Optional;
 
 public class Controller {
@@ -52,6 +46,7 @@ public class Controller {
     @FXML Label fleschScoreText;
     @FXML ColorPicker colorPicker;
     @FXML Spinner<Integer> fontSizeSpinner;
+    @FXML ComboBox fontChoiceBox;
 
     int syllableCount = 0; int wordCount = 0; int sentenceCount = 0; double fleschScore = 0;
     PauseTransition waitForFinishedInput = new PauseTransition(Duration.seconds(0.5));
@@ -197,7 +192,8 @@ public class Controller {
         return style.replaceAll("(-fx-fill: #\\S+;)", "-fx-fill: #" + color + ";");
     }
 
-    public void changeFont(MouseEvent mouseEvent) {
+    public void changeFontSize(MouseEvent mouseEvent) {
+        textArea.setStyle("-fx-font-family: 'Comic Sans MS'");
         IndexRange selection = textArea.getSelection();
         int fontSize = fontSizeSpinner.getValue();
         String currentStyle = textArea.getDocument().getStyleAtPosition(selection.getEnd());

@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -13,6 +14,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.fxmisc.richtext.InlineCssTextArea?>
 
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <top>
       <VBox BorderPane.alignment="CENTER">
@@ -48,8 +51,16 @@
             </MenuBar>
             <HBox alignment="CENTER" spacing="10.0">
                <children>
-                  <Spinner fx:id="fontSizeSpinner" initialValue="12" max="72" min="1" onMouseClicked="#changeFont" />
-                  <ColorPicker fx:id="colorPicker" onAction="#changeColor" />
+                   <ComboBox fx:id="fontChoiceBox" prefWidth="120.0">
+                       <items>
+                           <FXCollections fx:factory="observableArrayList">
+                               <String fx:id="Arial" fx:value="Arial" />
+                               <String fx:id="ComicSans" fx:value="Comic Cans MS" />
+                           </FXCollections>
+                       </items>
+                   </ComboBox>
+                  <Spinner fx:id="fontSizeSpinner" initialValue="12" max="72" min="1" onMouseClicked="#changeFontSize" prefWidth="80.0" />
+                  <ColorPicker fx:id="colorPicker" onAction="#changeColor" prefWidth="50.0" />
                </children></HBox>
          </children>
       </VBox>

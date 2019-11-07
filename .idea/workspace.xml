@@ -2,20 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/links/MasterLinkedList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/markov/Markov.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Typer/counters/Syllable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Typer/counters/Syllable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Typer/counters/Sentence.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Typer/counters/Sentence.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Typer/sample/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Typer/sample/Controller.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Typer/sample/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Typer/sample/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Typer/sample/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Typer/sample/sample.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Typer/sample/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Typer/sample/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/counters/Syllable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/counters/Syllable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/counters/Word.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/counters/Word.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/counters/Sentence.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/counters/Sentence.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/sample.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/style.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -104,6 +100,7 @@
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="false" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -266,7 +263,13 @@
       <workItem from="1572706913485" duration="37000" />
       <workItem from="1572743243624" duration="315000" />
       <workItem from="1572809870275" duration="691000" />
-      <workItem from="1572811455586" duration="9214000" />
+      <workItem from="1572811455586" duration="9902000" />
+      <workItem from="1572870911377" duration="884000" />
+      <workItem from="1572872724001" duration="239000" />
+      <workItem from="1572880160996" duration="1256000" />
+      <workItem from="1572970902939" duration="625000" />
+      <workItem from="1573132626220" duration="1516000" />
+      <workItem from="1573143628788" duration="711000" />
     </task>
     <servers />
   </component>
