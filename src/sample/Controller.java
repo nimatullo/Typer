@@ -1,11 +1,13 @@
 package sample;
 
+import com.jfoenix.controls.JFXPopup;
+import com.jfoenix.controls.JFXTextArea;
 import counters.FleschScore;
 import counters.Sentence;
 import counters.Syllable;
 import counters.Word;
 import javafx.animation.PauseTransition;
-import javafx.collections.FXCollections;
+import javafx.embed.swing.JFXPanel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -13,6 +15,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.util.Pair;
@@ -24,10 +27,13 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 public class Controller {
+    @FXML CheckBox displayCounterCheckBox;
     @FXML InlineCssTextArea textArea;
     @FXML MenuItem newMenuItem;
     @FXML MenuItem openMenuItem;
@@ -52,7 +58,7 @@ public class Controller {
     PauseTransition waitForFinishedInput = new PauseTransition(Duration.seconds(0.5));
 
     private void exit(Stage primaryStage) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit?", ButtonType.YES,
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Are you sure you want to exit?",ButtonType.YES,
                 ButtonType.NO);
         alert.setTitle("Are You Sure You Want To Exit?");
         alert.setHeaderText("You are about to exit your project. All unsaved progress may be lost.");
@@ -193,7 +199,6 @@ public class Controller {
     }
 
     public void changeFontSize(MouseEvent mouseEvent) {
-        textArea.setStyle("-fx-font-family: 'Comic Sans MS'");
         IndexRange selection = textArea.getSelection();
         int fontSize = fontSizeSpinner.getValue();
         String currentStyle = textArea.getDocument().getStyleAtPosition(selection.getEnd());
@@ -202,16 +207,16 @@ public class Controller {
             textArea.setStyle(selection.getStart(), selection.getEnd(), currentStyle + "-fx-font-size: " + fontSize + "px;");
         } else {
             textArea.setStyle(textArea.getSelection().getStart(), textArea.getSelection().getEnd(),
-                    changeFont(currentStyle, fontSize));
+                    changeFontAction(currentStyle, fontSize));
         }
     }
 
-    private String changeFont(String style, int fontSize) {
+    private String changeFontAction(String style,int fontSize) {
         return style.replaceAll("(-fx-font-size: \\d+px;)", "-fx-font-size: " + fontSize + "px;");
     }
 
     public void showWordCount(ActionEvent actionEvent) {
-        if (wordCountMenuItem.isSelected()) {
+        if (wordCountMenuItem.isSelected() || displayCounterCheckBox.isSelected()) {
             wordCountLabel.setOpacity(1);
             wordCountText.setOpacity(1);
         }
@@ -222,7 +227,7 @@ public class Controller {
     }
 
     public void showSyllableCounter(ActionEvent actionEvent) {
-        if (syllableCountMenuItem.isSelected()) {
+        if (syllableCountMenuItem.isSelected() || displayCounterCheckBox.isSelected()) {
             syllableCountLabel.setOpacity(1);
             syllableText.setOpacity(1);
         }
@@ -233,7 +238,7 @@ public class Controller {
     }
 
     public void showSentenceCount(ActionEvent actionEvent) {
-        if (sentenceCountMenuItem.isSelected()) {
+        if (sentenceCountMenuItem.isSelected() || displayCounterCheckBox.isSelected()) {
             sentenceCountLabel.setOpacity(1);
             sentenceText.setOpacity(1);
         }
@@ -244,7 +249,7 @@ public class Controller {
     }
 
     public void showFleschScore(ActionEvent actionEvent) {
-        if (fleschScoreMenuItem.isSelected()) {
+        if (fleschScoreMenuItem.isSelected() || displayCounterCheckBox.isSelected()) {
             fleschScoreLabel.setOpacity(1);
             fleschScoreText.setOpacity(1);
         }
@@ -282,5 +287,41 @@ public class Controller {
             MasterLinkedList s = markov.parser(new File(fileField.getText()));
             textArea.replaceText(s.generateParagraph(startingWord.getText(), Integer.parseInt(words.getText()) ));
         }
+    }
+
+    public void changeFontAction(ActionEvent actionEvent) {
+        String font = fontChoiceBox.getValue().toString();
+        IndexRange selection = textArea.getSelection();
+        String currentStyle = textArea.getDocument().getStyleAtPosition(selection.getEnd());
+
+        if (!currentStyle.contains("-fx-font-family")) {
+            String style = currentStyle + "-fx-font-family: '" + font + "';";
+            textArea.setStyle(selection.getStart(), selection.getEnd(),  style);
+        } else {
+            textArea.setStyle(textArea.getSelection().getStart(), textArea.getSelection().getEnd(),
+                    changeFont(currentStyle, font));
+        }
+    }
+
+    private String changeFont(String currentStyle, String font) {
+        return currentStyle.replaceAll("(-fx-font-family: '.*';)", "-fx-font-family: '" + font + "';");
+    }
+
+    public void displayCounters(ActionEvent actionEvent) {
+        if (displayCounterCheckBox.isSelected()) {
+            fleschScoreMenuItem.setSelected(true);
+            sentenceCountMenuItem.setSelected(true);
+            syllableCountMenuItem.setSelected(true);
+            wordCountMenuItem.setSelected(true);
+        } else {
+            fleschScoreMenuItem.setSelected(false);
+            sentenceCountMenuItem.setSelected(false);
+            syllableCountMenuItem.setSelected(false);
+            wordCountMenuItem.setSelected(false);
+        }
+        showFleschScore(new ActionEvent());
+        showSentenceCount(new ActionEvent());
+        showSyllableCounter(new ActionEvent());
+        showWordCount(new ActionEvent());
     }
 }
