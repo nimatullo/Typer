@@ -154,7 +154,7 @@ public class Controller {
         waitForFinishedInput.playFromStart();
     }
 
-    public void updateStatusBarNumbers() {
+    private void updateStatusBarNumbers() {
         getWordCount();
         getSentenceCount();
         getSyllablesCount();
@@ -274,7 +274,7 @@ public class Controller {
         TextField startingWord = new TextField();
         startingWord.setPromptText("Starting Word");
         ButtonType generateButton = new ButtonType("Generate Paragraph", ButtonBar.ButtonData.OK_DONE);
-        VBox vBox = new VBox(fileField, words, startingWord);
+        VBox vBox = new VBox(20, fileField, words, startingWord);
         dialog.getDialogPane().getButtonTypes().add(generateButton);
         dialog.getDialogPane().setContent(vBox);
 
