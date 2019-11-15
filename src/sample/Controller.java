@@ -53,6 +53,7 @@ public class Controller {
     @FXML ColorPicker colorPicker;
     @FXML Spinner<Integer> fontSizeSpinner;
     @FXML ComboBox fontChoiceBox;
+    @FXML String path = "";
 
     int syllableCount = 0; int wordCount = 0; int sentenceCount = 0; double fleschScore = 0;
     PauseTransition waitForFinishedInput = new PauseTransition(Duration.seconds(0.5));
@@ -80,6 +81,7 @@ public class Controller {
         if (alert.getResult() == ButtonType.YES) {
             save(new ActionEvent());
             textArea.replaceText("");
+            path = "";
         }
     }
 
@@ -88,6 +90,7 @@ public class Controller {
             FileChooser fileChooser = new FileChooser();
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "...txt"));
             File selectedFile = fileChooser.showOpenDialog(primaryStage);
+            path = selectedFile.getPath();
             String fileString = new String(Files.readAllBytes(selectedFile.toPath()));
             textArea.replaceText(fileString);
             updateStatusBarNumbers();
@@ -97,11 +100,14 @@ public class Controller {
     }
 
     private void save(Stage primaryStage) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "...txt"));
-        fileChooser.setTitle("Save");
-        File file = fileChooser.showSaveDialog(primaryStage);
-        if (file != null) {
+        if (!path.equals("")) {
+            saveFile(new File(path));
+        } else {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "...txt"));
+            fileChooser.setTitle("Save");
+            File file = fileChooser.showSaveDialog(primaryStage);
+            path = file.getPath();
             saveFile(file);
         }
     }
@@ -111,7 +117,6 @@ public class Controller {
             String textContent = textArea.getText();
             BufferedWriter writer = new BufferedWriter(new FileWriter(f));
             writer.write(textContent);
-
             writer.close();
         } catch (IOException e) {
             System.out.println("Cannot Save");
