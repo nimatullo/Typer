@@ -2,10 +2,7 @@ package sample;
 
 import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXTextArea;
-import counters.FleschScore;
-import counters.Sentence;
-import counters.Syllable;
-import counters.Word;
+import counters.*;
 import javafx.animation.PauseTransition;
 import javafx.embed.swing.JFXPanel;
 import javafx.event.ActionEvent;
@@ -162,21 +159,27 @@ public class Controller {
     }
 
     private void getWordCount() {
-        Word word = new Word();
-        wordCount = word.getWordCount(textArea.getText());
-        wordCountLabel.setText(Integer.toString(wordCount));
+//        Word word = new Word();
+//        wordCount = word.getWordCount(textArea.getText());
+//        wordCountLabel.setText(Integer.toString(wordCount));
+        SingleLoopCounter slc = new SingleLoopCounter();
+        wordCountLabel.setText(Integer.toString(slc.getCount(textArea.getText())[1]));
     }
 
     private void getSentenceCount() {
-        Sentence sentence = new Sentence();
-        sentenceCount = sentence.getSentenceCount(textArea.getText());
-        sentenceCountLabel.setText(Integer.toString(sentenceCount));
+//        Sentence sentence = new Sentence();
+//        sentenceCount = sentence.getSentenceCount(textArea.getText());
+//        sentenceCountLabel.setText(Integer.toString(sentenceCount));
+        SingleLoopCounter slc = new SingleLoopCounter();
+        sentenceCountLabel.setText(Integer.toString(slc.getCount(textArea.getText())[0]));
     }
 
     private void getSyllablesCount() {
-        Syllable syllable = new Syllable();
-        syllableCount = syllable.getSyllables(textArea.getText());
-        syllableCountLabel.setText(Integer.toString(syllableCount));
+//        Syllable syllable = new Syllable();
+//        syllableCount = syllable.getSyllables(textArea.getText());
+//        syllableCountLabel.setText(Integer.toString(syllableCount));
+        SingleLoopCounter slc = new SingleLoopCounter();
+        syllableCountLabel.setText(Integer.toString(slc.getCount(textArea.getText())[2]));
     }
 
     private void getFleschScore() {
