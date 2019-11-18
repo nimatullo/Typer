@@ -159,27 +159,21 @@ public class Controller {
     }
 
     private void getWordCount() {
-//        Word word = new Word();
-//        wordCount = word.getWordCount(textArea.getText());
-//        wordCountLabel.setText(Integer.toString(wordCount));
-        SingleLoopCounter slc = new SingleLoopCounter();
-        wordCountLabel.setText(Integer.toString(slc.getCount(textArea.getText())[1]));
+        Word word = new Word();
+        wordCount = word.getWordCount(textArea.getText());
+        wordCountLabel.setText(Integer.toString(wordCount));
     }
 
     private void getSentenceCount() {
-//        Sentence sentence = new Sentence();
-//        sentenceCount = sentence.getSentenceCount(textArea.getText());
-//        sentenceCountLabel.setText(Integer.toString(sentenceCount));
-        SingleLoopCounter slc = new SingleLoopCounter();
-        sentenceCountLabel.setText(Integer.toString(slc.getCount(textArea.getText())[0]));
+        Sentence sentence = new Sentence();
+        sentenceCount = sentence.getSentenceCount(textArea.getText());
+        sentenceCountLabel.setText(Integer.toString(sentenceCount));
     }
 
     private void getSyllablesCount() {
-//        Syllable syllable = new Syllable();
-//        syllableCount = syllable.getSyllables(textArea.getText());
-//        syllableCountLabel.setText(Integer.toString(syllableCount));
-        SingleLoopCounter slc = new SingleLoopCounter();
-        syllableCountLabel.setText(Integer.toString(slc.getCount(textArea.getText())[2]));
+        Syllable syllable = new Syllable();
+        syllableCount = syllable.getSyllables(textArea.getText());
+        syllableCountLabel.setText(Integer.toString(syllableCount));
     }
 
     private void getFleschScore() {

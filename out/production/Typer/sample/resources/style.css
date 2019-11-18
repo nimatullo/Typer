@@ -1,0 +1,63 @@
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button {
+    -fx-border-color: #212121;
+    -fx-border-width: 0.7px;
+    -fx-border-radius: 1px;
+}
+
+.spinner:focused {
+    -fx-background-color: #212121;
+}
+
+.spinner .increment-arrow-button:focused,
+.spinner .decrement-arrow-button:focused {
+    -fx-background-color: #212121;
+}
+
+.menu-bar {
+    -fx-background-color: #fafafa;
+}
+
+.menu-item:focused {
+    -fx-background-color: #e0e0e0;
+}
+
+.menu-item:focused .label {
+    -fx-text-fill: #212121;
+}
+
+.menu-item {
+    -fx-background-color: #fafafa;
+    -fx-padding: 8px;
+}
+
+.menu-item > .label {
+    -fx-pref-width: 50px;
+}
+
+.menu:hover{
+    -fx-background-color: #e0e0e0;
+}
+
+.menu {
+    -fx-background-radius: 5px;
+}
+
+.menu:hover .label {
+    -fx-text-fill: #212121;
+}
+
+.menu:showing {
+    -fx-background-color: #bdbdbd;
+}
+
+.context-menu {
+    -fx-background-color: #fafafa;
+    -fx-background-radius: 5px;
+}
+
+.separator *.line {
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-background-color: black;
+}
