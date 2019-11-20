@@ -12,7 +12,7 @@ public class Demo {
         mll.addToList("Doniyor", "Josh");
         mll.addToList("Josh", "Natis");
         mll.addToList("Natis", "Daniel");
-        mll.search("Nimatullo");
+//        mll.search("Nimatullo");
 
     }
 }
