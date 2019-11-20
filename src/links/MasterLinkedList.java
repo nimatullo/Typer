@@ -8,16 +8,41 @@ import java.util.LinkedList;
 
 public class MasterLinkedList extends LinkedList<MasterLink> {
 
+//    public void addToList(String word, String secondWord) {
+//        MasterLink newLink = containsLink(word);
+//        if (!contains(newLink)) {
+//            if (!isEmpty()) {
+//                System.out.println("adding " + word + " to masterList.");
+//                getLast().setNext(newLink);
+//            }
+//            add(newLink);
+//        }
+//        BabyLink babyLink = new BabyLink(secondWord);
+//        if (!newLink.getLinkedList().isEmpty()) {
+//            System.out.println("adding " + secondWord + " to " + word);
+//            newLink.getLinkedList().getLast().setNext(babyLink);
+//        }
+//        newLink.addBabyLink(babyLink);
+//    }
+
     public void addToList(String word, String secondWord) {
-        MasterLink newLink = containsLink(word);
+        word = word.replaceAll("[^a-zA-Z0-9 ]","");
+        MasterLink newLink = search(word);
         if (!contains(newLink)) {
             if (!isEmpty()) {
-                getLast().setNext(newLink);
+                System.out.println("adding " + word + " to masterList.");
+                MasterLink temp = getLast();
+                newLink.setPrev(temp);
+                add(newLink);
+                temp.setNext(newLink);
             }
-            add(newLink);
+            else {
+                add(newLink);
+            }
         }
         BabyLink babyLink = new BabyLink(secondWord);
         if (!newLink.getLinkedList().isEmpty()) {
+            System.out.println("adding " + secondWord + " to " + word);
             newLink.getLinkedList().getLast().setNext(babyLink);
         }
         newLink.addBabyLink(babyLink);
@@ -30,6 +55,44 @@ public class MasterLinkedList extends LinkedList<MasterLink> {
             }
         }
         return new MasterLink(word);
+    }
+
+    public MasterLink search(String word) {
+        MasterLink current = null;
+        for (MasterLink masterLink : this) {
+            if (masterLink.getWord().equals(word)) {
+                current = masterLink;
+                break;
+            }
+        }
+        if (indexOf(current) == 0) {
+            return current;
+        }
+        if (current == null) {
+            return new MasterLink(word);
+        }
+        else {
+            while (current.prev.prev != null) {
+                int i = indexOf(current);
+                MasterLink prev = current.getPrev();
+                MasterLink next = current.getNext();
+                current.next = (prev);
+                current.prev = (prev.prev);
+                prev.prev.next = (current);
+                prev.next = (next);
+
+                MasterLink temp = current;
+                set(i, current);
+                set(i-1, prev);
+            }
+            getFirst().next = current.next;
+            getFirst().prev = current;
+            current.next = getFirst();
+            current.prev = null;
+            set(1, getFirst());
+            set(0, current);
+        }
+        return current;
     }
 
     public String generateParagraph(String startingWord, int numberOfWords) {

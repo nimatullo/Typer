@@ -8,12 +8,8 @@ public class PeekableScanner {
     private Scanner scan;
     private String next;
 
-    public PeekableScanner(File source) {
-        try {
-            scan = new Scanner(source);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+    public PeekableScanner(String source) {
+        scan = new Scanner(source);
         if (scan.hasNext())
             next = scan.next();
         else

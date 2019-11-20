@@ -264,29 +264,19 @@ public class Controller {
     public void generateText(ActionEvent actionEvent) {
         Dialog<Pair<File, Integer>> dialog = new Dialog<>();
         dialog.setTitle("Markov Generator");
-        TextField fileField = new TextField();
-        fileField.setPromptText("File");
         TextField words = new TextField();
         words.setPromptText("Number of words");
         TextField startingWord = new TextField();
         startingWord.setPromptText("Starting Word");
         ButtonType generateButton = new ButtonType("Generate Paragraph", ButtonBar.ButtonData.OK_DONE);
-        VBox vBox = new VBox(20, fileField, words, startingWord);
+        VBox vBox = new VBox(20, words, startingWord);
         dialog.getDialogPane().getButtonTypes().add(generateButton);
         dialog.getDialogPane().setContent(vBox);
-
-        fileField.setOnMouseClicked(e -> {
-            Stage primaryStage = (Stage) menuBar.getScene().getWindow();
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "...txt"));
-            File file = fileChooser.showOpenDialog(primaryStage);
-            fileField.setText(file.getPath());
-        });
 
         Optional<Pair<File, Integer>> result = dialog.showAndWait();
         if (result.isPresent()) {
             Markov markov = new Markov();
-            MasterLinkedList s = markov.parser(new File(fileField.getText()));
+            MasterLinkedList s = markov.parser(textArea.getText());
             textArea.replaceText(s.generateParagraph(startingWord.getText(), Integer.parseInt(words.getText()) ));
         }
     }

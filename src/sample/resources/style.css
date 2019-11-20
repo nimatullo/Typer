@@ -32,7 +32,10 @@
 }
 
 .menu-item > .label {
-    -fx-pref-width: 50px;
+    -fx-pref-width: 100px;
+}
+.menu-item {
+    -fx-pref-width: 150px;
 }
 
 .menu:hover{
@@ -54,10 +57,4 @@
 .context-menu {
     -fx-background-color: #fafafa;
     -fx-background-radius: 5px;
-}
-
-.separator *.line {
-    -fx-border-style: solid;
-    -fx-border-width: 1px;
-    -fx-background-color: black;
 }

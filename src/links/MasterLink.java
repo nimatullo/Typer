@@ -5,11 +5,13 @@ import java.util.LinkedList;
 public class MasterLink {
     private String word;
     private LinkedList<BabyLink> linkedList;
-    private MasterLink next;
+    public MasterLink next;
+    public MasterLink prev;
 
     MasterLink(String word) {
         this.word = word;
         next = null;
+        prev = null;
         linkedList = new LinkedList<>();
     }
 
@@ -17,8 +19,16 @@ public class MasterLink {
         this.next = nextLink;
     }
 
+    void setPrev(MasterLink prevLink) {
+        this.prev = prevLink;
+    }
+
     MasterLink getNext() {
         return next;
+    }
+
+    MasterLink getPrev() {
+        return prev;
     }
 
     public void display() {
