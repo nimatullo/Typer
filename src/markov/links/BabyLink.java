@@ -1,4 +1,4 @@
-package links;
+package markov.links;
  class BabyLink {
     private BabyLink next;
     private String value;

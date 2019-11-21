@@ -1,9 +1,11 @@
 package markov;
 
 import helper.PeekableScanner;
-import links.MasterLinkedList;
+import javafx.concurrent.Task;
+import markov.links.MasterLinkedList;
 
 public class Markov {
+
     public MasterLinkedList parser(String s) {
         MasterLinkedList masterLinkedList = new MasterLinkedList();
         PeekableScanner scan1 = new PeekableScanner(s);

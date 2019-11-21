@@ -24,11 +24,11 @@
 <?import javafx.scene.text.Font?>
 <?import org.fxmisc.richtext.InlineCssTextArea?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F8F9FA#F8F9FF #F8F9FA#F8F9FF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F8F9FA#F8F9FF #F8F9FA#F8F9FF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Controller">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
-            <MenuBar fx:id="menuBar" stylesheets="@resources/style.css">
+            <MenuBar fx:id="menuBar" stylesheets="@../controllers/resources/style.css">
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
@@ -79,7 +79,7 @@
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@resources/icons8-document.png" />
+                              <Image url="@../controllers/resources/icons8-document.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -88,7 +88,7 @@
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@resources/icons8-opened_folder.png" />
+                              <Image url="@../controllers/resources/icons8-opened_folder.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -97,13 +97,13 @@
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@resources/icons8-save.png" />
+                              <Image url="@../controllers/resources/icons8-save.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </JFXButton>
                   <Separator maxHeight="30.0" minHeight="1.0" orientation="VERTICAL" prefHeight="5.0" />
-                  <JFXComboBox fx:id="fontChoiceBox" focusColor="#757575" labelFloat="true" onAction="#changeFontAction" stylesheets="@resources/style.css" value="Arial">
+                  <JFXComboBox fx:id="fontChoiceBox" focusColor="#757575" labelFloat="true" onAction="#changeFontAction" stylesheets="@../controllers/resources/style.css" value="Arial">
                    <items>
                        <FXCollections fx:factory="observableArrayList">
                            <String fx:value="Arial" />
@@ -115,7 +115,7 @@
                    </items>
                   </JFXComboBox>
 
-                  <Spinner fx:id="fontSizeSpinner" editable="true" initialValue="12" max="72" min="1" onMouseClicked="#changeFontSize" prefWidth="80.0" stylesheets="@resources/style.css" />
+                  <Spinner fx:id="fontSizeSpinner" editable="true" initialValue="12" max="72" min="1" onMouseClicked="#changeFontSize" prefWidth="80.0" stylesheets="@../controllers/resources/style.css" />
                   <JFXColorPicker fx:id="colorPicker" onAction="#changeColor" />
                   <Separator layoutX="164.0" layoutY="15.0" maxHeight="30.0" minHeight="1.0" orientation="VERTICAL" prefHeight="5.0" />
                   <JFXCheckBox fx:id="displayCounterCheckBox" checkedColor="#757575" onAction="#displayCounters" text="Display Counters" />
@@ -137,7 +137,7 @@
                <font>
                   <Font size="14.0" />
                </font></Label>
-            <Separator orientation="VERTICAL" prefHeight="1.0" stylesheets="@resources/style.css" />
+            <Separator orientation="VERTICAL" prefHeight="1.0" stylesheets="@../controllers/resources/style.css" />
             <Label fx:id="syllableText" alignment="CENTER_RIGHT" contentDisplay="RIGHT" opacity="0.0" text="Syllable Count:" textAlignment="CENTER">
                <font>
                   <Font size="14.0" />
@@ -146,7 +146,7 @@
                <font>
                   <Font size="14.0" />
                </font></Label>
-            <Separator layoutX="121.0" layoutY="10.0" orientation="VERTICAL" prefHeight="1.0" stylesheets="@resources/style.css" />
+            <Separator layoutX="121.0" layoutY="10.0" orientation="VERTICAL" prefHeight="1.0" stylesheets="@../controllers/resources/style.css" />
             <Label fx:id="sentenceText" opacity="0.0" text="Sentence Count:">
                <font>
                   <Font size="14.0" />
@@ -155,7 +155,7 @@
                <font>
                   <Font size="14.0" />
                </font></Label>
-            <Separator layoutX="247.0" layoutY="10.0" orientation="VERTICAL" prefHeight="1.0" stylesheets="@resources/style.css" />
+            <Separator layoutX="247.0" layoutY="10.0" orientation="VERTICAL" prefHeight="1.0" stylesheets="@../controllers/resources/style.css" />
             <Label fx:id="fleschScoreText" opacity="0.0" text="Flesch Score:">
                <font>
                   <Font size="14.0" />

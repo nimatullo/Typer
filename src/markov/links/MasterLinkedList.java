@@ -1,4 +1,6 @@
-package links;
+package markov.links;
+
+import javafx.concurrent.Task;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -44,14 +46,14 @@ public class MasterLinkedList extends LinkedList<MasterLink> {
     public String generateParagraph(String startingWord, int numberOfWords) {
         int random;
         MasterLink current = containsLink(startingWord);
-        String paragraph = startingWord + " ";
+        StringBuilder paragraph = new StringBuilder(startingWord + " ");
         for (int i = 0; i < numberOfWords; i++) {
             random = (int)(Math.random() * current.getLinkedList().size());
-            paragraph += (current.getLinkedList().get(random).getValue() + " ");
+            paragraph.append(current.getLinkedList().get(random).getValue()).append(" ");
             current = get(i);
         }
-        writeToFile(paragraph);
-        return paragraph;
+        writeToFile(paragraph.toString());
+        return paragraph.toString();
     }
 
     private void writeToFile(String paragraph) {

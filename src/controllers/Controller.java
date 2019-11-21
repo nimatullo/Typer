@@ -1,33 +1,25 @@
-package sample;
+package controllers;
 
-import com.jfoenix.controls.JFXPopup;
-import com.jfoenix.controls.JFXTextArea;
 import counters.*;
 import javafx.animation.PauseTransition;
-import javafx.embed.swing.JFXPanel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.util.Pair;
-import links.MasterLinkedList;
-import markov.Markov;
 import org.fxmisc.richtext.InlineCssTextArea;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
-import java.util.Optional;
-import java.util.ResourceBundle;
 
 public class Controller {
     @FXML CheckBox displayCounterCheckBox;
@@ -51,6 +43,7 @@ public class Controller {
     @FXML Spinner<Integer> fontSizeSpinner;
     @FXML ComboBox fontChoiceBox;
     @FXML String path = "";
+    static String paragraphText;
 
     int syllableCount = 0; int wordCount = 0; int sentenceCount = 0; double fleschScore = 0;
     PauseTransition waitForFinishedInput = new PauseTransition(Duration.seconds(0.5));
@@ -262,23 +255,51 @@ public class Controller {
     }
 
     public void generateText(ActionEvent actionEvent) {
-        Dialog<Pair<File, Integer>> dialog = new Dialog<>();
-        dialog.setTitle("Markov Generator");
-        TextField words = new TextField();
-        words.setPromptText("Number of words");
-        TextField startingWord = new TextField();
-        startingWord.setPromptText("Starting Word");
-        ButtonType generateButton = new ButtonType("Generate Paragraph", ButtonBar.ButtonData.OK_DONE);
-        VBox vBox = new VBox(20, words, startingWord);
-        dialog.getDialogPane().getButtonTypes().add(generateButton);
-        dialog.getDialogPane().setContent(vBox);
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getClassLoader().getResource("view/markov.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Markov Generator");
+            Scene scene = new Scene(root, 450, 450);
+            stage.setScene(scene);
 
-        Optional<Pair<File, Integer>> result = dialog.showAndWait();
-        if (result.isPresent()) {
-            Markov markov = new Markov();
-            MasterLinkedList s = markov.parser(textArea.getText());
-            textArea.replaceText(s.generateParagraph(startingWord.getText(), Integer.parseInt(words.getText()) ));
+            paragraphText = textArea.getText();
+            stage.showAndWait();
+            if (!paragraphText.isEmpty()) {
+                textArea.replaceText(paragraphText);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+
+
+
+
+
+//        Dialog<Integer> dialog = new Dialog<>();
+//        dialog.setTitle("Markov Generator");
+//        TextField words = new TextField();
+//        words.setPromptText("Number of words");
+//        TextField startingWord = new TextField();
+//        startingWord.setPromptText("Starting Word");
+//        ButtonType generateButton = new ButtonType("Generate Paragraph", ButtonBar.ButtonData.OK_DONE);
+//        VBox vBox = new VBox(20, words, startingWord);
+//        dialog.getDialogPane().getButtonTypes().add(generateButton);
+//        dialog.getDialogPane().setContent(vBox);
+//
+//
+//        Optional <Integer> result = dialog.showAndWait();
+//
+//        if (result.isPresent()) {
+//            ProgressIndicator pi = new ProgressIndicator();
+//            vBox = new VBox(pi);
+//            dialog.getDialogPane().setContent(vBox);
+////            //TODO: Progress Bar.
+////            Markov markov = new Markov();
+////            MasterLinkedList s = markov.parser(textArea.getText());
+////            textArea.replaceText(s.generateParagraph(startingWord.getText(), Integer.parseInt(words.getText()) ));
+//        }
     }
 
     public void changeFontAction(ActionEvent actionEvent) {

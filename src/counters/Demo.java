@@ -1,8 +1,6 @@
 package counters;
 
-import links.MasterLinkedList;
-
-import java.util.ArrayList;
+import markov.links.MasterLinkedList;
 
 public class Demo {
     public static void main(String[] args) {
