@@ -42,9 +42,6 @@
     -fx-background-color: #e0e0e0;
 }
 
-.menu {
-    -fx-background-radius: 5px;
-}
 
 .menu:hover .label {
     -fx-text-fill: #212121;
@@ -56,5 +53,4 @@
 
 .context-menu {
     -fx-background-color: #fafafa;
-    -fx-background-radius: 5px;
 }

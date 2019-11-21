@@ -57,4 +57,9 @@ public class MarkovController {
         });
         backgroundThread.restart();
     }
+
+    public void close(ActionEvent actionEvent) {
+        Stage stage = (Stage)vBox.getScene().getWindow();
+        stage.close();
+    }
 }

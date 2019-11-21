@@ -28,51 +28,80 @@
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
-            <MenuBar fx:id="menuBar" stylesheets="@../controllers/resources/style.css">
-              <menus>
-                <Menu mnemonicParsing="false" text="File">
-                  <items>
-                        <MenuItem fx:id="newMenuItem" mnemonicParsing="false" onAction="#newButton" text="New">
-                           <accelerator>
-                              <KeyCodeCombination alt="UP" code="N" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
-                           </accelerator></MenuItem>
-                        <MenuItem fx:id="openMenuItem" mnemonicParsing="false" onAction="#open" text="Open">
-                           <accelerator>
-                              <KeyCodeCombination alt="UP" code="O" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
-                           </accelerator></MenuItem>
-                    <MenuItem mnemonicParsing="false" text="Close">
-                           <accelerator>
-                              <KeyCodeCombination alt="UP" code="W" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
-                           </accelerator></MenuItem>
-                        <MenuItem mnemonicParsing="false" onAction="#save" text="Save">
-                           <accelerator>
-                              <KeyCodeCombination alt="UP" code="S" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
-                           </accelerator></MenuItem>
-                        <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit">
-                           <accelerator>
-                              <KeyCodeCombination alt="UP" code="Q" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
-                           </accelerator></MenuItem>
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                  <items>
-                        <MenuItem mnemonicParsing="false" onAction="#cut" text="Cut" />
-                    <MenuItem mnemonicParsing="false" onAction="#copy" text="Copy" />
-                        <MenuItem mnemonicParsing="false" onAction="#paste" text="Paste" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" onAction="#generateText" text="Markov" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="View">
-                     <items>
-                        <CheckMenuItem fx:id="wordCountMenuItem" mnemonicParsing="false" onAction="#showWordCount" text="Word Counter" />
-                        <CheckMenuItem fx:id="syllableCountMenuItem" mnemonicParsing="false" onAction="#showSyllableCounter" text="Syllable Counter" />
-                        <CheckMenuItem fx:id="sentenceCountMenuItem" mnemonicParsing="false" onAction="#showSentenceCount" text="Sentence Counter" />
-                        <CheckMenuItem fx:id="fleschScoreMenuItem" mnemonicParsing="false" onAction="#showFleschScore" text="Flesch Score" />
-                     </items>
-                </Menu>
-              </menus>
-            </MenuBar>
+            <HBox alignment="CENTER_RIGHT" prefWidth="200.0">
+               <children>
+                  <MenuBar fx:id="menuBar" stylesheets="@../controllers/resources/style.css">
+                    <menus>
+                      <Menu mnemonicParsing="false" text="File">
+                        <items>
+                              <MenuItem fx:id="newMenuItem" mnemonicParsing="false" onAction="#newButton" text="New">
+                                 <accelerator>
+                                    <KeyCodeCombination alt="UP" code="N" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
+                                 </accelerator>
+                              </MenuItem>
+                              <MenuItem fx:id="openMenuItem" mnemonicParsing="false" onAction="#open" text="Open">
+                                 <accelerator>
+                                    <KeyCodeCombination alt="UP" code="O" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
+                                 </accelerator>
+                              </MenuItem>
+                          <MenuItem mnemonicParsing="false" text="Close">
+                                 <accelerator>
+                                    <KeyCodeCombination alt="UP" code="W" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
+                                 </accelerator>
+                              </MenuItem>
+                              <MenuItem mnemonicParsing="false" onAction="#save" text="Save">
+                                 <accelerator>
+                                    <KeyCodeCombination alt="UP" code="S" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
+                                 </accelerator>
+                              </MenuItem>
+                              <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit">
+                                 <accelerator>
+                                    <KeyCodeCombination alt="UP" code="Q" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
+                                 </accelerator>
+                              </MenuItem>
+                        </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="Edit">
+                        <items>
+                              <MenuItem mnemonicParsing="false" onAction="#cut" text="Cut" />
+                          <MenuItem mnemonicParsing="false" onAction="#copy" text="Copy" />
+                              <MenuItem mnemonicParsing="false" onAction="#paste" text="Paste" />
+                              <SeparatorMenuItem mnemonicParsing="false" />
+                              <MenuItem mnemonicParsing="false" onAction="#generateText" text="Markov" />
+                        </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="View">
+                           <items>
+                              <CheckMenuItem fx:id="wordCountMenuItem" mnemonicParsing="false" onAction="#showWordCount" text="Word Counter" />
+                              <CheckMenuItem fx:id="syllableCountMenuItem" mnemonicParsing="false" onAction="#showSyllableCounter" text="Syllable Counter" />
+                              <CheckMenuItem fx:id="sentenceCountMenuItem" mnemonicParsing="false" onAction="#showSentenceCount" text="Sentence Counter" />
+                              <CheckMenuItem fx:id="fleschScoreMenuItem" mnemonicParsing="false" onAction="#showFleschScore" text="Flesch Score" />
+                           </items>
+                      </Menu>
+                    </menus>
+                  </MenuBar>
+                  <HBox HBox.hgrow="ALWAYS" />
+                  <JFXButton alignment="CENTER" style="-fx-background-radius: 0;" text="">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../controllers/resources/icons8-minimize_window.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton alignment="CENTER" layoutX="560.0" layoutY="10.0" onAction="#exit" ripplerFill="#e43f3f" style="-fx-background-radius: 0;" text="">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../controllers/resources/icons8-close_window.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <Separator prefWidth="200.0" />
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" spacing="10.0" style="-fx-background-color: #E9EAED#E9EAED;">
                <children>
                   <JFXButton ellipsisString="" layoutX="20.0" layoutY="15.0" onAction="#newButton" prefHeight="30.0" prefWidth="0.0" ripplerFill="#00fcfc" text="">

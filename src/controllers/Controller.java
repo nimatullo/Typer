@@ -3,15 +3,20 @@ package controllers;
 import counters.*;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.fxmisc.richtext.InlineCssTextArea;
 
@@ -44,6 +49,7 @@ public class Controller {
     @FXML ComboBox fontChoiceBox;
     @FXML String path = "";
     static String paragraphText;
+    private double x = 0, y = 0;
 
     int syllableCount = 0; int wordCount = 0; int sentenceCount = 0; double fleschScore = 0;
     PauseTransition waitForFinishedInput = new PauseTransition(Duration.seconds(0.5));
@@ -55,7 +61,6 @@ public class Controller {
         alert.setHeaderText("You are about to exit your project. All unsaved progress may be lost.");
         alert.showAndWait();
         if (alert.getResult() == ButtonType.YES) {
-            save(new ActionEvent());
             primaryStage.close();
         }
     }
@@ -260,8 +265,25 @@ public class Controller {
             root = FXMLLoader.load(getClass().getClassLoader().getResource("view/markov.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Markov Generator");
-            Scene scene = new Scene(root, 450, 450);
+            stage.initStyle(StageStyle.UNDECORATED);
+            root.setEffect(new DropShadow());
+            Scene scene = new Scene(root);
             stage.setScene(scene);
+
+            root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    x = stage.getX() - mouseEvent.getScreenX();
+                    y = stage.getY() - mouseEvent.getScreenY();
+                }
+            });
+            root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    stage.setX(mouseEvent.getScreenX() + x);
+                    stage.setY(mouseEvent.getScreenY() + y);
+                }
+            });
 
             paragraphText = textArea.getText();
             stage.showAndWait();
@@ -271,35 +293,6 @@ public class Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
-
-
-
-//        Dialog<Integer> dialog = new Dialog<>();
-//        dialog.setTitle("Markov Generator");
-//        TextField words = new TextField();
-//        words.setPromptText("Number of words");
-//        TextField startingWord = new TextField();
-//        startingWord.setPromptText("Starting Word");
-//        ButtonType generateButton = new ButtonType("Generate Paragraph", ButtonBar.ButtonData.OK_DONE);
-//        VBox vBox = new VBox(20, words, startingWord);
-//        dialog.getDialogPane().getButtonTypes().add(generateButton);
-//        dialog.getDialogPane().setContent(vBox);
-//
-//
-//        Optional <Integer> result = dialog.showAndWait();
-//
-//        if (result.isPresent()) {
-//            ProgressIndicator pi = new ProgressIndicator();
-//            vBox = new VBox(pi);
-//            dialog.getDialogPane().setContent(vBox);
-////            //TODO: Progress Bar.
-////            Markov markov = new Markov();
-////            MasterLinkedList s = markov.parser(textArea.getText());
-////            textArea.replaceText(s.generateParagraph(startingWord.getText(), Integer.parseInt(words.getText()) ));
-//        }
     }
 
     public void changeFontAction(ActionEvent actionEvent) {
