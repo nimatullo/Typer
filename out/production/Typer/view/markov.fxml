@@ -35,7 +35,7 @@
                   <JFXTextField fx:id="numberOfWords" focusColor="#757575" labelFloat="true" promptText="Number of Words" />
                </children>
             </HBox>
-            <JFXButton fx:id="generateButton" buttonType="RAISED" onAction="#generateParagraph" ripplerFill="#b2b2b2" style="-fx-border-radius: 5px; -fx-background-color: #757575#757575;" text="Generate" textFill="WHITE" />
+            <JFXButton fx:id="generateButton" buttonType="RAISED" onAction="#generateParagraph" ripplerFill="LIME" style="-fx-border-radius: 5px; -fx-background-color: #00b300;" text="Generate" textFill="WHITE" />
          </children>
       </VBox>
    </center>
@@ -54,7 +54,7 @@
                   </Label>
                </children>
             </HBox>
-            <JFXButton onAction="#close" text=" ">
+            <JFXButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" onAction="#close" ripplerFill="#f24343" text=" " textAlignment="CENTER">
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>

@@ -2,6 +2,9 @@ package controllers;
 
 import counters.*;
 import javafx.animation.PauseTransition;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,9 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -48,6 +49,7 @@ public class Controller {
     @FXML Spinner<Integer> fontSizeSpinner;
     @FXML ComboBox fontChoiceBox;
     @FXML String path = "";
+    @FXML Label saveLabel;
     static String paragraphText;
     private double x = 0, y = 0;
 
@@ -57,7 +59,7 @@ public class Controller {
     private void exit(Stage primaryStage) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Are you sure you want to exit?",ButtonType.YES,
                 ButtonType.NO);
-        alert.setTitle("Are You Sure You Want To Exit?");
+        alert.setTitle("Exit");
         alert.setHeaderText("You are about to exit your project. All unsaved progress may be lost.");
         alert.showAndWait();
         if (alert.getResult() == ButtonType.YES) {
@@ -66,17 +68,18 @@ public class Controller {
     }
 
     private void newButton () {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Creating a new document may cause unsaved changes to " +
-                "be lost.",
-                ButtonType.YES,
-                ButtonType.NO);
-        alert.setTitle("New?");
-        alert.setHeaderText("Are you sure you want to create a new document?");
-        alert.showAndWait();
-        if (alert.getResult() == ButtonType.YES) {
-            save(new ActionEvent());
-            textArea.replaceText("");
-            path = "";
+        if (!textArea.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Creating a new document may cause unsaved changes to " +
+                    "be lost.",
+                    ButtonType.YES,
+                    ButtonType.NO);
+            alert.setTitle("New");
+            alert.setHeaderText("Are you sure you want to create a new document?");
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.YES) {
+                path = "";
+                textArea.replaceText("");
+            }
         }
     }
 
@@ -91,6 +94,8 @@ public class Controller {
             updateStatusBarNumbers();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (NullPointerException e) {
+            System.out.println("Open Operation Cancelled.");
         }
     }
 
@@ -102,7 +107,10 @@ public class Controller {
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "...txt"));
             fileChooser.setTitle("Save");
             File file = fileChooser.showSaveDialog(primaryStage);
-            path = file.getPath();
+            try {
+                path = file.getPath();
+            } catch (NullPointerException ignored) {
+            }
             saveFile(file);
         }
     }
@@ -113,8 +121,9 @@ public class Controller {
             BufferedWriter writer = new BufferedWriter(new FileWriter(f));
             writer.write(textContent);
             writer.close();
-        } catch (IOException e) {
-            System.out.println("Cannot Save");
+            saveLabel.setVisible(true);
+        } catch (IOException  | NullPointerException e) {
+            System.out.println("Save operation cancelled or failed.");
         }
     }
 
@@ -150,6 +159,7 @@ public class Controller {
     }
 
     private void updateStatusBarNumbers() {
+        saveLabel.setVisible(false);
         getWordCount();
         getSentenceCount();
         getSyllablesCount();
@@ -190,11 +200,11 @@ public class Controller {
             textArea.setStyle(selection.getStart(), selection.getEnd(), currentStyle + "-fx-fill: #" + color + ";");
         } else {
             textArea.setStyle(textArea.getSelection().getStart(), textArea.getSelection().getEnd(),
-                    changeColor(currentStyle, color));
+                    swapColor(currentStyle, color));
         }
     }
 
-    private String changeColor(String style, String color) {
+    private String swapColor(String style,String color) {
         return style.replaceAll("(-fx-fill: #\\S+;)", "-fx-fill: #" + color + ";");
     }
 
@@ -207,55 +217,74 @@ public class Controller {
             textArea.setStyle(selection.getStart(), selection.getEnd(), currentStyle + "-fx-font-size: " + fontSize + "px;");
         } else {
             textArea.setStyle(textArea.getSelection().getStart(), textArea.getSelection().getEnd(),
-                    changeFontAction(currentStyle, fontSize));
+                    swapFontSize(currentStyle, fontSize));
         }
     }
 
-    private String changeFontAction(String style,int fontSize) {
+    private String swapFontSize(String style,int fontSize) {
         return style.replaceAll("(-fx-font-size: \\d+px;)", "-fx-font-size: " + fontSize + "px;");
     }
 
+    public void changeFontFamily(ActionEvent actionEvent) {
+        String font = fontChoiceBox.getValue().toString();
+        IndexRange selection = textArea.getSelection();
+        String currentStyle = textArea.getDocument().getStyleAtPosition(selection.getEnd());
+
+        if (!currentStyle.contains("-fx-font-family")) {
+            String style = currentStyle + "-fx-font-family: '" + font + "';";
+            textArea.setStyle(selection.getStart(), selection.getEnd(),  style);
+        } else {
+            textArea.setStyle(textArea.getSelection().getStart(), textArea.getSelection().getEnd(),
+                    swapFontFamily(currentStyle, font));
+        }
+    }
+
+    private String swapFontFamily(String currentStyle,String font) {
+        return currentStyle.replaceAll("(-fx-font-family: '.*';)", "-fx-font-family: '" + font + "';");
+    }
+
+
     public void showWordCount(ActionEvent actionEvent) {
         if (wordCountMenuItem.isSelected() || displayCounterCheckBox.isSelected()) {
-            wordCountLabel.setOpacity(1);
-            wordCountText.setOpacity(1);
+            wordCountLabel.setVisible(true);
+            wordCountText.setVisible(true);
         }
         else {
-            wordCountLabel.setOpacity(0);
-            wordCountText.setOpacity(0);
+            wordCountLabel.setVisible(false);
+            wordCountText.setVisible(false);
         }
     }
 
     public void showSyllableCounter(ActionEvent actionEvent) {
         if (syllableCountMenuItem.isSelected() || displayCounterCheckBox.isSelected()) {
-            syllableCountLabel.setOpacity(1);
-            syllableText.setOpacity(1);
+            syllableCountLabel.setVisible(true);
+            syllableText.setVisible(true);
         }
         else {
-            syllableCountLabel.setOpacity(0);
-            syllableText.setOpacity(0);
+            syllableCountLabel.setVisible(false);
+            syllableText.setVisible(false);
         }
     }
 
     public void showSentenceCount(ActionEvent actionEvent) {
         if (sentenceCountMenuItem.isSelected() || displayCounterCheckBox.isSelected()) {
-            sentenceCountLabel.setOpacity(1);
-            sentenceText.setOpacity(1);
+            sentenceCountLabel.setVisible(true);
+            sentenceText.setVisible(true);
         }
         else {
-            sentenceCountLabel.setOpacity(0);
-            sentenceText.setOpacity(0);
+            sentenceCountLabel.setVisible(false);
+            sentenceText.setVisible(false);
         }
     }
 
     public void showFleschScore(ActionEvent actionEvent) {
         if (fleschScoreMenuItem.isSelected() || displayCounterCheckBox.isSelected()) {
-            fleschScoreLabel.setOpacity(1);
-            fleschScoreText.setOpacity(1);
+            fleschScoreLabel.setVisible(true);
+            fleschScoreText.setVisible(true);
         }
         else {
-            fleschScoreText.setOpacity(0);
-            fleschScoreLabel.setOpacity(0);
+            fleschScoreText.setVisible(false);
+            fleschScoreLabel.setVisible(false);
         }
     }
 
@@ -293,24 +322,6 @@ public class Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void changeFontAction(ActionEvent actionEvent) {
-        String font = fontChoiceBox.getValue().toString();
-        IndexRange selection = textArea.getSelection();
-        String currentStyle = textArea.getDocument().getStyleAtPosition(selection.getEnd());
-
-        if (!currentStyle.contains("-fx-font-family")) {
-            String style = currentStyle + "-fx-font-family: '" + font + "';";
-            textArea.setStyle(selection.getStart(), selection.getEnd(),  style);
-        } else {
-            textArea.setStyle(textArea.getSelection().getStart(), textArea.getSelection().getEnd(),
-                    changeFont(currentStyle, font));
-        }
-    }
-
-    private String changeFont(String currentStyle, String font) {
-        return currentStyle.replaceAll("(-fx-font-family: '.*';)", "-fx-font-family: '" + font + "';");
     }
 
     public void displayCounters(ActionEvent actionEvent) {

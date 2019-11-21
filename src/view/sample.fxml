@@ -81,7 +81,7 @@
                     </menus>
                   </MenuBar>
                   <HBox HBox.hgrow="ALWAYS" />
-                  <JFXButton alignment="CENTER" style="-fx-background-radius: 0;" text="">
+                  <JFXButton alignment="CENTER" maxWidth="0.0" minHeight="2.0" minWidth="30.0" style="-fx-background-radius: 0;" text="">
                      <graphic>
                         <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -90,7 +90,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXButton alignment="CENTER" layoutX="560.0" layoutY="10.0" onAction="#exit" ripplerFill="#e43f3f" style="-fx-background-radius: 0;" text="">
+                  <JFXButton alignment="CENTER" layoutX="560.0" layoutY="10.0" maxWidth="0.0" minHeight="2.0" minWidth="30.0" onAction="#exit" ripplerFill="#e43f3f" style="-fx-background-radius: 0;" text="">
                      <graphic>
                         <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -102,7 +102,7 @@
                </children>
             </HBox>
             <Separator prefWidth="200.0" />
-            <HBox alignment="CENTER_LEFT" prefHeight="40.0" spacing="10.0" style="-fx-background-color: #E9EAED#E9EAED;">
+            <HBox alignment="CENTER_LEFT" prefHeight="40.0" spacing="10.0" style="-fx-background-color: #E9EAED;">
                <children>
                   <JFXButton ellipsisString="" layoutX="20.0" layoutY="15.0" onAction="#newButton" prefHeight="30.0" prefWidth="0.0" ripplerFill="#00fcfc" text="">
                      <graphic>
@@ -131,8 +131,20 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
+                  <Label fx:id="saveLabel" text="All Changes Saved." textFill="#ababab" visible="false">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../controllers/resources/icons8-checked.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
                   <Separator maxHeight="30.0" minHeight="1.0" orientation="VERTICAL" prefHeight="5.0" />
-                  <JFXComboBox fx:id="fontChoiceBox" focusColor="#757575" labelFloat="true" onAction="#changeFontAction" stylesheets="@../controllers/resources/style.css" value="Arial">
+                  <JFXComboBox fx:id="fontChoiceBox" focusColor="#757575" labelFloat="true" onAction="#changeFontFamily" stylesheets="@../controllers/resources/style.css" value="Arial">
                    <items>
                        <FXCollections fx:factory="observableArrayList">
                            <String fx:value="Arial" />
@@ -158,38 +170,38 @@
    <bottom>
       <HBox spacing="10.0" style="-fx-background-color: #E9EAED;" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="wordCountText" contentDisplay="TOP" opacity="0.0" text="Word Count: ">
+            <Label fx:id="wordCountText" contentDisplay="TOP" text="Word Count: " visible="false">
                <font>
                   <Font size="14.0" />
                </font></Label>
-            <Label fx:id="wordCountLabel" opacity="0.0" text="0">
+            <Label fx:id="wordCountLabel" text="0" visible="false">
                <font>
                   <Font size="14.0" />
                </font></Label>
             <Separator orientation="VERTICAL" prefHeight="1.0" stylesheets="@../controllers/resources/style.css" />
-            <Label fx:id="syllableText" alignment="CENTER_RIGHT" contentDisplay="RIGHT" opacity="0.0" text="Syllable Count:" textAlignment="CENTER">
+            <Label fx:id="syllableText" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Syllable Count:" textAlignment="CENTER" visible="false">
                <font>
                   <Font size="14.0" />
                </font></Label>
-            <Label fx:id="syllableCountLabel" opacity="0.0" text="0">
+            <Label fx:id="syllableCountLabel" text="0" visible="false">
                <font>
                   <Font size="14.0" />
                </font></Label>
             <Separator layoutX="121.0" layoutY="10.0" orientation="VERTICAL" prefHeight="1.0" stylesheets="@../controllers/resources/style.css" />
-            <Label fx:id="sentenceText" opacity="0.0" text="Sentence Count:">
+            <Label fx:id="sentenceText" text="Sentence Count:" visible="false">
                <font>
                   <Font size="14.0" />
                </font></Label>
-            <Label fx:id="sentenceCountLabel" opacity="0.0" text="0">
+            <Label fx:id="sentenceCountLabel" text="0" visible="false">
                <font>
                   <Font size="14.0" />
                </font></Label>
             <Separator layoutX="247.0" layoutY="10.0" orientation="VERTICAL" prefHeight="1.0" stylesheets="@../controllers/resources/style.css" />
-            <Label fx:id="fleschScoreText" opacity="0.0" text="Flesch Score:">
+            <Label fx:id="fleschScoreText" text="Flesch Score:" visible="false">
                <font>
                   <Font size="14.0" />
                </font></Label>
-            <Label fx:id="fleschScoreLabel" opacity="0.0" text="0">
+            <Label fx:id="fleschScoreLabel" text="0" visible="false">
                <font>
                   <Font size="14.0" />
                </font></Label>

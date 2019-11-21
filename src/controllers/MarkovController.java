@@ -9,8 +9,10 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import markov.Markov;
 import markov.links.MasterLinkedList;
@@ -27,14 +29,13 @@ public class MarkovController {
     @FXML
     JFXButton generateButton = new JFXButton();
     private final Markov markov = new Markov();
-    private Service<Void> backgroundThread;
 
     public void generateParagraph(ActionEvent actionEvent) {
         JFXSpinner spinner = new JFXSpinner();
         Label label = new Label("Generating Paragraph...");
         vBox.getChildren().setAll(spinner, label);
 
-        backgroundThread = new Service<Void>() {
+        Service<Void> backgroundThread = new Service<Void>() {
             @Override
             protected Task<Void> createTask() {
                 return new Task<Void>() {

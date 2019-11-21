@@ -27,7 +27,7 @@ public class MasterLinkedList extends LinkedList<MasterLink> {
             }
         }
         BabyLink babyLink = new BabyLink(secondWord);
-        if (!newLink.getLinkedList().isEmpty()) {
+        if (!newLink.getLinkedList().isEmpty() && secondWord != null) {
             System.out.println("adding " + secondWord + " to " + word);
             newLink.getLinkedList().getLast().setNext(babyLink);
         }
