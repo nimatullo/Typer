@@ -76,9 +76,14 @@
                               <CheckMenuItem fx:id="syllableCountMenuItem" mnemonicParsing="false" onAction="#showSyllableCounter" text="Syllable Counter" />
                               <CheckMenuItem fx:id="sentenceCountMenuItem" mnemonicParsing="false" onAction="#showSentenceCount" text="Sentence Counter" />
                               <CheckMenuItem fx:id="fleschScoreMenuItem" mnemonicParsing="false" onAction="#showFleschScore" text="Flesch Score" />
-                              <MenuItem mnemonicParsing="false" onAction="#showGraph" text="Show Loop Difference" />
                            </items>
                       </Menu>
+                        <Menu mnemonicParsing="false" text="Tools">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Spell Check" onAction="#checkSpelling"/>
+                              <MenuItem mnemonicParsing="false" onAction="#showGraph" text="Show Loop Difference" />
+                          </items>
+                        </Menu>
                     </menus>
                   </MenuBar>
                   <HBox HBox.hgrow="ALWAYS" />

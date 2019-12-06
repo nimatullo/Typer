@@ -2,47 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b12e0600-36ca-4571-ac37-4df221b54127" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/out/production/Typer/Dem.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Typer/controllers/Graph.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Typer/counters/MultiLoopCounter.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Typer/view/graph.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Dem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controllers/Graph.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/graph.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/description.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/google_api_services_translate_v2_rev51_1_25_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/richtextfx_fat_0_10_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/richtextfx_fat_0_10_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Typer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Typer.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Typer/META-INF/Typer.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Typer/Dem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Typer/Dem.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Typer/controllers/Controller$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Typer/controllers/Controller$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Typer/controllers/Controller$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Typer/controllers/Controller$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Typer/controllers/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Typer/controllers/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Typer/controllers/resources/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Typer/controllers/resources/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Typer/counters/Demo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Typer/counters/FleschScore.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Typer/counters/Sentence.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Typer/counters/Syllable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Typer/counters/Word.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Typer/markov/Markov.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Typer/markov/Markov.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Typer/markov/links/MasterLinkedList.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Typer/markov/links/MasterLinkedList.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Typer/view/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Typer/view/sample.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/MarkovController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/MarkovController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/resources/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/resources/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/counters/Demo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/counters/FleschScore.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/counters/Sentence.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/counters/Syllable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/counters/MultiLoopCounter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/counters/Word.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/markov/Markov.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/markov/Markov.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/markov/links/MasterLinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/markov/links/MasterLinkedList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/sample.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -72,7 +39,14 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Dem" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Dem" />
+      <module name="Typer" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="controllers.Main" />
       <module name="Typer" />
@@ -89,6 +63,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Dem" />
       </list>
     </recent_temporary>
   </component>
@@ -115,7 +90,7 @@
       <option name="presentableId" value="Default" />
       <updated>1575662860615</updated>
       <workItem from="1575662863617" duration="442000" />
-      <workItem from="1575664363988" duration="162000" />
+      <workItem from="1575664363988" duration="3661000" />
     </task>
     <servers />
   </component>
@@ -123,22 +98,42 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1227" height="285" key="GridCell.Tab.0.bottom" timestamp="1575663278224">
+    <state x="648" y="253" key="#com.intellij.ide.util.MemberChooser" timestamp="1575666520549">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1227" height="285" key="GridCell.Tab.0.bottom/0.23.1680.1027/-116.-1057.1920.1057@0.23.1680.1027" timestamp="1575663278224" />
-    <state width="1227" height="285" key="GridCell.Tab.0.center" timestamp="1575663278222">
+    <state x="648" y="253" key="#com.intellij.ide.util.MemberChooser/0.23.1680.1027/-116.-1057.1920.1057@0.23.1680.1027" timestamp="1575666520549" />
+    <state width="1227" height="351" key="GridCell.Tab.0.bottom" timestamp="1575673349546">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1227" height="285" key="GridCell.Tab.0.center/0.23.1680.1027/-116.-1057.1920.1057@0.23.1680.1027" timestamp="1575663278222" />
-    <state width="1227" height="285" key="GridCell.Tab.0.left" timestamp="1575663278221">
+    <state width="1227" height="351" key="GridCell.Tab.0.bottom/0.23.1680.1027/-116.-1057.1920.1057@0.23.1680.1027" timestamp="1575673349546" />
+    <state width="1227" height="351" key="GridCell.Tab.0.center" timestamp="1575673349545">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1227" height="285" key="GridCell.Tab.0.left/0.23.1680.1027/-116.-1057.1920.1057@0.23.1680.1027" timestamp="1575663278221" />
-    <state width="1227" height="285" key="GridCell.Tab.0.right" timestamp="1575663278223">
+    <state width="1227" height="351" key="GridCell.Tab.0.center/0.23.1680.1027/-116.-1057.1920.1057@0.23.1680.1027" timestamp="1575673349545" />
+    <state width="1227" height="351" key="GridCell.Tab.0.left" timestamp="1575673349545">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1227" height="285" key="GridCell.Tab.0.right/0.23.1680.1027/-116.-1057.1920.1057@0.23.1680.1027" timestamp="1575663278223" />
+    <state width="1227" height="351" key="GridCell.Tab.0.left/0.23.1680.1027/-116.-1057.1920.1057@0.23.1680.1027" timestamp="1575673349545" />
+    <state width="1227" height="351" key="GridCell.Tab.0.right" timestamp="1575673349546">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1227" height="351" key="GridCell.Tab.0.right/0.23.1680.1027/-116.-1057.1920.1057@0.23.1680.1027" timestamp="1575673349546" />
+    <state width="1227" height="351" key="GridCell.Tab.1.bottom" timestamp="1575673349411">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1227" height="351" key="GridCell.Tab.1.bottom/0.23.1680.1027/-116.-1057.1920.1057@0.23.1680.1027" timestamp="1575673349411" />
+    <state width="1227" height="351" key="GridCell.Tab.1.center" timestamp="1575673349411">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1227" height="351" key="GridCell.Tab.1.center/0.23.1680.1027/-116.-1057.1920.1057@0.23.1680.1027" timestamp="1575673349411" />
+    <state width="1227" height="351" key="GridCell.Tab.1.left" timestamp="1575673349410">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1227" height="351" key="GridCell.Tab.1.left/0.23.1680.1027/-116.-1057.1920.1057@0.23.1680.1027" timestamp="1575673349410" />
+    <state width="1227" height="351" key="GridCell.Tab.1.right" timestamp="1575673349411">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1227" height="351" key="GridCell.Tab.1.right/0.23.1680.1027/-116.-1057.1920.1057@0.23.1680.1027" timestamp="1575673349411" />
     <state x="323" y="118" key="SettingsEditor" timestamp="1575663380055">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>

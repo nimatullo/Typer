@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -27,9 +28,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
+import java.util.*;
 
-public class Controller {
+public class Controller implements Initializable {
     @FXML CheckBox displayCounterCheckBox;
     @FXML InlineCssTextArea textArea;
     @FXML MenuItem newMenuItem;
@@ -55,6 +58,7 @@ public class Controller {
     MultiLoopCounter mlc = new MultiLoopCounter();
     static String paragraphText;
     private double x = 0, y = 0;
+    private HashMap<String, String> spellCheck;
 
     int syllableCount = 0; int wordCount = 0; int sentenceCount = 0; double fleschScore = 0;
     PauseTransition waitForFinishedInput = new PauseTransition(Duration.seconds(0.5));
@@ -354,5 +358,47 @@ public class Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void initialize(URL url,ResourceBundle resourceBundle) {
+        spellCheck = new HashMap<>();
+        File dictionaryTxt = new File("/Users/sherzodnimatullo/IdeaProjects/CSE 218/Typer/src/controllers/resources/dictionary.txt");
+        try {
+            Scanner scan = new Scanner(dictionaryTxt);
+            while (scan.hasNext()) {
+                String value = scan.next();
+                spellCheck.put(value, value);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void checkSpelling(ActionEvent actionEvent) {
+        ArrayList<String> misspelledWords = new ArrayList<>();
+        StringTokenizer tokenizer = new StringTokenizer(textArea.getText());
+        while (tokenizer.hasMoreTokens()) {
+            String token = tokenizer.nextToken();
+            token = token.toLowerCase().replaceAll("[.,/#!$%^&*;:{}=\\-_`~()]", "");
+            if (spellCheck.get(token) == null) {
+                misspelledWords.add(token);
+            }
+        }
+        showMisspelledWords(misspelledWords);
+    }
+
+    private void showMisspelledWords(ArrayList<String> misspelledWords) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Spell Check");
+        alert.setHeaderText("You have " + misspelledWords.size() + " misspelled words.");
+        String content = "";
+        for (String s : misspelledWords) {
+            content += s + "\n";
+        }
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }
