@@ -1,7 +1,6 @@
 package markov;
 
 import helper.PeekableScanner;
-import javafx.concurrent.Task;
 import markov.links.MasterLinkedList;
 
 public class Markov {

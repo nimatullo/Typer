@@ -33,7 +33,7 @@ public class MarkovController {
     public void generateParagraph(ActionEvent actionEvent) {
         JFXSpinner spinner = new JFXSpinner();
         Label label = new Label("Generating Paragraph...");
-        vBox.getChildren().setAll(spinner, label);
+        vBox.getChildren().setAll(spinner,label);
 
         Service<Void> backgroundThread = new Service<Void>() {
             @Override

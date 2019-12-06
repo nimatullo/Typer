@@ -32,7 +32,7 @@
 }
 
 .menu-item > .label {
-    -fx-pref-width: 100px;
+    -fx-pref-width: 150px;
 }
 .menu-item {
     -fx-pref-width: 150px;

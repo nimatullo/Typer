@@ -15,12 +15,14 @@ import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.fxmisc.richtext.InlineCssTextArea;
 
+import javax.swing.border.Border;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -50,6 +52,7 @@ public class Controller {
     @FXML ComboBox fontChoiceBox;
     @FXML String path = "";
     @FXML Label saveLabel;
+    MultiLoopCounter mlc = new MultiLoopCounter();
     static String paragraphText;
     private double x = 0, y = 0;
 
@@ -158,7 +161,7 @@ public class Controller {
         waitForFinishedInput.playFromStart();
     }
 
-    private void updateStatusBarNumbers() {
+    public void updateStatusBarNumbers() {
         saveLabel.setVisible(false);
         getWordCount();
         getSentenceCount();
@@ -167,26 +170,22 @@ public class Controller {
     }
 
     private void getWordCount() {
-        Word word = new Word();
-        wordCount = word.getWordCount(textArea.getText());
+        wordCount = mlc.getWordCount(textArea.getText());
         wordCountLabel.setText(Integer.toString(wordCount));
     }
 
     private void getSentenceCount() {
-        Sentence sentence = new Sentence();
-        sentenceCount = sentence.getSentenceCount(textArea.getText());
+        sentenceCount = mlc.getSentenceCount(textArea.getText());
         sentenceCountLabel.setText(Integer.toString(sentenceCount));
     }
 
     private void getSyllablesCount() {
-        Syllable syllable = new Syllable();
-        syllableCount = syllable.getSyllables(textArea.getText());
+        syllableCount = mlc.getSyllables(textArea.getText());
         syllableCountLabel.setText(Integer.toString(syllableCount));
     }
 
     private void getFleschScore() {
-        FleschScore fleschScoreDriver = new FleschScore();
-        fleschScore = fleschScoreDriver.getFleschScore(sentenceCount, syllableCount, wordCount);
+        fleschScore = mlc.getFleschScore(sentenceCount, syllableCount, wordCount);
         fleschScoreLabel.setText(Double.toString(fleschScore));
     }
 
@@ -340,5 +339,20 @@ public class Controller {
         showSentenceCount(new ActionEvent());
         showSyllableCounter(new ActionEvent());
         showWordCount(new ActionEvent());
+    }
+
+    public void showGraph(ActionEvent actionEvent) {
+        Parent root;
+        try {
+            paragraphText = textArea.getText();
+            root = FXMLLoader.load(getClass().getClassLoader().getResource("view/graph.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Markov Generator");
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

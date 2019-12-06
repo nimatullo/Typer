@@ -4,8 +4,6 @@
       <root url="jar://$USER_HOME$/Downloads/richtextfx-fat-0.10.2.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/Downloads/richtextfx-fat-0.10.2.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

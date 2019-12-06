@@ -1,7 +1,5 @@
 package markov.links;
 
-import javafx.concurrent.Task;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
