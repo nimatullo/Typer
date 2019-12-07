@@ -351,7 +351,7 @@ public class Controller implements Initializable {
             paragraphText = textArea.getText();
             root = FXMLLoader.load(getClass().getClassLoader().getResource("view/graph.fxml"));
             Stage stage = new Stage();
-            stage.setTitle("Markov Generator");
+            stage.setTitle("One Loop vs Multiple Loops");
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.showAndWait();
@@ -398,7 +398,9 @@ public class Controller implements Initializable {
         for (String s : misspelledWords) {
             content += s + "\n";
         }
-        alert.setContentText(content);
+        TextArea area = new TextArea(content);
+        area.setEditable(false);
+        alert.getDialogPane().setContent(area);
         alert.showAndWait();
     }
 }

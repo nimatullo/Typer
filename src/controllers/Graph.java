@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
-public class Graph implements Initializable {
+public class Graph implements Initializable{
     @FXML
     BorderPane pane;
 
@@ -22,7 +22,7 @@ public class Graph implements Initializable {
         final NumberAxis xAxis = new NumberAxis();
         xAxis.setLabel("Percentage of Text");
         final NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("Runtime (seconds)");
+        yAxis.setLabel("Runtime (milliseconds)");
         final LineChart<Number, Number> lineChart= new LineChart<>(xAxis, yAxis);
         lineChart.setTitle("%");
 
@@ -33,6 +33,7 @@ public class Graph implements Initializable {
         oneLoop.setName("One Loop");
         long [] timesMLC = getNumbersMLC(Controller.paragraphText);
         long [] timesSLC = getNumbersSLC(Controller.paragraphText);
+
 
         for (int i = 1; i <= 10; i++) {
             multipleLoops.getData().add(new XYChart.Data<>(i*10, timesMLC[i-1]));
@@ -57,7 +58,7 @@ public class Graph implements Initializable {
             int div = (int)Math.round(content.length() * factor);
             long time = System.nanoTime();
             updateNumbersMLC(content.substring(0, div));
-            times[i] = TimeUnit.SECONDS.convert(System.nanoTime() - time, TimeUnit.NANOSECONDS);
+            times[i] = TimeUnit.MILLISECONDS.convert(System.nanoTime() - time, TimeUnit.NANOSECONDS);
         }
         return times;
     }
@@ -69,7 +70,7 @@ public class Graph implements Initializable {
             int div = (int)Math.round(content.length() * factor);
             long time = System.nanoTime();
             updateNumbersSLC(content.substring(0, div));
-            times[i] = TimeUnit.SECONDS.convert(System.nanoTime() - time, TimeUnit.NANOSECONDS);
+            times[i] = TimeUnit.MILLISECONDS.convert(System.nanoTime() - time, TimeUnit.NANOSECONDS);
             factor += 0.1;
         }
         return times;

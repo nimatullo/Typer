@@ -7,6 +7,7 @@
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -80,7 +81,7 @@
                       </Menu>
                         <Menu mnemonicParsing="false" text="Tools">
                           <items>
-                            <MenuItem mnemonicParsing="false" text="Spell Check" onAction="#checkSpelling"/>
+                            <MenuItem mnemonicParsing="false" onAction="#checkSpelling" text="Spell Check" />
                               <MenuItem mnemonicParsing="false" onAction="#showGraph" text="Show Loop Difference" />
                           </items>
                         </Menu>

@@ -16,24 +16,21 @@ public class SingleLoopCounter {
             s = s.replaceAll("ing", "");
             sylCount++;
         }
-        Pattern patternSentence = Pattern.compile("[a-zA-Z][.!?]");
-        Matcher sentence = patternSentence.matcher(s);
-        Pattern patternWord = Pattern.compile("[a-zA-Z][\\s,.!?;:\"-]");
-        Matcher word = patternWord.matcher(s);
-        Pattern patternSyl = Pattern.compile("[aeiouy]{1,2}");
-        Matcher syllable = patternSyl.matcher(s);
 
-        int counter = 0;
-        while (counter < s.length()) {
-            if (sentence.find())
+        Pattern pattern = Pattern.compile("([a-zA-Z][\\s,;:\"-])|([a-zA-Z][.!?])|([aeiouy]{1,2})");
+        Matcher matcher = pattern.matcher(s);
+
+        while (matcher.find()) {
+            if (matcher.group(1) != null) {
                 sentCount++;
-            if (word.find())
                 wordCount++;
-            if (syllable.find()) {
+            }
+            if (matcher.group(2) != null)
+                wordCount++;
+            if (matcher.group(3) != null) {
                 sylCount++;
                 sylCount = silentE(s, sylCount);
             }
-            counter++;
         }
         return new int[]{sentCount, wordCount, sylCount};
     }
