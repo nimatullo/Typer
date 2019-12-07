@@ -160,11 +160,6 @@ public class Controller implements Initializable {
         save(primaryStage);
     }
 
-    public void statusBarListener(KeyEvent keyEvent) {
-        waitForFinishedInput.setOnFinished(e -> updateStatusBarNumbers());
-        waitForFinishedInput.playFromStart();
-    }
-
     public void updateStatusBarNumbers() {
         saveLabel.setVisible(false);
         getWordCount();
@@ -362,6 +357,10 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url,ResourceBundle resourceBundle) {
+        textArea.textProperty().addListener(e -> {
+            waitForFinishedInput.setOnFinished(x -> updateStatusBarNumbers());
+            waitForFinishedInput.playFromStart();
+        });
         spellCheck = new HashMap<>();
         File dictionaryTxt = new File("/Users/sherzodnimatullo/IdeaProjects/CSE 218/Typer/src/controllers/resources/dictionary.txt");
         try {
@@ -374,7 +373,6 @@ public class Controller implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void checkSpelling(ActionEvent actionEvent) {

@@ -219,7 +219,7 @@
       </HBox>
    </bottom>
    <center>
-      <InlineCssTextArea fx:id="textArea" onKeyPressed="#statusBarListener" style="-fx-padding: 10px; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 5, 0.0 , 0 , 1 ) dropshadow( three-pass-box , rgba(0,0,0,0.5) , 5, 0.0 , 0 , 1 );" wrapText="true" BorderPane.alignment="CENTER">
+      <InlineCssTextArea fx:id="textArea" style="-fx-padding: 10px; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 5, 0.0 , 0 , 1 ) dropshadow( three-pass-box , rgba(0,0,0,0.5) , 5, 0.0 , 0 , 1 );" wrapText="true" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin></InlineCssTextArea>
