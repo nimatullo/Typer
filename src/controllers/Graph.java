@@ -24,7 +24,7 @@ public class Graph implements Initializable{
         final NumberAxis yAxis = new NumberAxis();
         yAxis.setLabel("Runtime (milliseconds)");
         final LineChart<Number, Number> lineChart= new LineChart<>(xAxis, yAxis);
-        lineChart.setTitle("%");
+        lineChart.setTitle("One Loop vs. Multiple Loops");
 
         XYChart.Series multipleLoops = new XYChart.Series();
         multipleLoops.setName("Multiple Loop");

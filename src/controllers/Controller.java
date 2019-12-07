@@ -30,6 +30,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
+import java.text.NumberFormat;
 import java.util.*;
 
 public class Controller implements Initializable {
@@ -170,17 +171,17 @@ public class Controller implements Initializable {
 
     private void getWordCount() {
         wordCount = mlc.getWordCount(textArea.getText());
-        wordCountLabel.setText(Integer.toString(wordCount));
+        wordCountLabel.setText(NumberFormat.getNumberInstance(Locale.US).format(wordCount));
     }
 
     private void getSentenceCount() {
         sentenceCount = mlc.getSentenceCount(textArea.getText());
-        sentenceCountLabel.setText(Integer.toString(sentenceCount));
+        sentenceCountLabel.setText(NumberFormat.getNumberInstance(Locale.US).format(sentenceCount));
     }
 
     private void getSyllablesCount() {
         syllableCount = mlc.getSyllables(textArea.getText());
-        syllableCountLabel.setText(Integer.toString(syllableCount));
+        syllableCountLabel.setText(NumberFormat.getNumberInstance(Locale.US).format(syllableCount));
     }
 
     private void getFleschScore() {
@@ -243,7 +244,7 @@ public class Controller implements Initializable {
 
 
     public void showWordCount(ActionEvent actionEvent) {
-        if (wordCountMenuItem.isSelected() || displayCounterCheckBox.isSelected()) {
+        if (wordCountMenuItem.isSelected()) {
             wordCountLabel.setVisible(true);
             wordCountText.setVisible(true);
         }
@@ -254,7 +255,7 @@ public class Controller implements Initializable {
     }
 
     public void showSyllableCounter(ActionEvent actionEvent) {
-        if (syllableCountMenuItem.isSelected() || displayCounterCheckBox.isSelected()) {
+        if (syllableCountMenuItem.isSelected()) {
             syllableCountLabel.setVisible(true);
             syllableText.setVisible(true);
         }
@@ -265,7 +266,7 @@ public class Controller implements Initializable {
     }
 
     public void showSentenceCount(ActionEvent actionEvent) {
-        if (sentenceCountMenuItem.isSelected() || displayCounterCheckBox.isSelected()) {
+        if (sentenceCountMenuItem.isSelected()) {
             sentenceCountLabel.setVisible(true);
             sentenceText.setVisible(true);
         }
@@ -276,7 +277,7 @@ public class Controller implements Initializable {
     }
 
     public void showFleschScore(ActionEvent actionEvent) {
-        if (fleschScoreMenuItem.isSelected() || displayCounterCheckBox.isSelected()) {
+        if (fleschScoreMenuItem.isSelected()) {
             fleschScoreLabel.setVisible(true);
             fleschScoreText.setVisible(true);
         }
@@ -346,7 +347,7 @@ public class Controller implements Initializable {
             paragraphText = textArea.getText();
             root = FXMLLoader.load(getClass().getClassLoader().getResource("view/graph.fxml"));
             Stage stage = new Stage();
-            stage.setTitle("One Loop vs Multiple Loops");
+            stage.setTitle("Show Loop Difference");
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.showAndWait();

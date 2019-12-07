@@ -7,7 +7,6 @@
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -55,6 +54,7 @@
                                     <KeyCodeCombination alt="UP" code="S" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
                                  </accelerator>
                               </MenuItem>
+                              <SeparatorMenuItem mnemonicParsing="false" />
                               <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit">
                                  <accelerator>
                                     <KeyCodeCombination alt="UP" code="Q" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
@@ -67,8 +67,6 @@
                               <MenuItem mnemonicParsing="false" onAction="#cut" text="Cut" />
                           <MenuItem mnemonicParsing="false" onAction="#copy" text="Copy" />
                               <MenuItem mnemonicParsing="false" onAction="#paste" text="Paste" />
-                              <SeparatorMenuItem mnemonicParsing="false" />
-                              <MenuItem mnemonicParsing="false" onAction="#generateText" text="Markov" />
                         </items>
                       </Menu>
                       <Menu mnemonicParsing="false" text="View">
@@ -83,32 +81,14 @@
                           <items>
                             <MenuItem mnemonicParsing="false" onAction="#checkSpelling" text="Spell Check" />
                               <MenuItem mnemonicParsing="false" onAction="#showGraph" text="Show Loop Difference" />
+                              <MenuItem mnemonicParsing="false" onAction="#generateText" text="Markov" />
                           </items>
                         </Menu>
                     </menus>
                   </MenuBar>
                   <HBox HBox.hgrow="ALWAYS" />
-                  <JFXButton alignment="CENTER" maxWidth="0.0" minHeight="2.0" minWidth="30.0" style="-fx-background-radius: 0;" text="">
-                     <graphic>
-                        <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../controllers/resources/icons8-minimize_window.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton alignment="CENTER" layoutX="560.0" layoutY="10.0" maxWidth="0.0" minHeight="2.0" minWidth="30.0" onAction="#exit" ripplerFill="#e43f3f" style="-fx-background-radius: 0;" text="">
-                     <graphic>
-                        <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../controllers/resources/icons8-close_window.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
                </children>
             </HBox>
-            <Separator prefWidth="200.0" />
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" spacing="10.0" style="-fx-background-color: #E9EAED;">
                <children>
                   <JFXButton ellipsisString="" layoutX="20.0" layoutY="15.0" onAction="#newButton" prefHeight="30.0" prefWidth="0.0" ripplerFill="#00fcfc" text="">
@@ -177,41 +157,17 @@
    <bottom>
       <HBox spacing="10.0" style="-fx-background-color: #E9EAED;" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="wordCountText" contentDisplay="TOP" text="Word Count: " visible="false">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
-            <Label fx:id="wordCountLabel" text="0" visible="false">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
+            <Label fx:id="wordCountText" contentDisplay="TOP" text="Word Count: " visible="false" />
+            <Label fx:id="wordCountLabel" text="0" visible="false" />
             <Separator orientation="VERTICAL" prefHeight="1.0" stylesheets="@../controllers/resources/style.css" />
-            <Label fx:id="syllableText" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Syllable Count:" textAlignment="CENTER" visible="false">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
-            <Label fx:id="syllableCountLabel" text="0" visible="false">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
+            <Label fx:id="syllableText" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Syllable Count:" textAlignment="CENTER" visible="false" />
+            <Label fx:id="syllableCountLabel" text="0" visible="false" />
             <Separator layoutX="121.0" layoutY="10.0" orientation="VERTICAL" prefHeight="1.0" stylesheets="@../controllers/resources/style.css" />
-            <Label fx:id="sentenceText" text="Sentence Count:" visible="false">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
-            <Label fx:id="sentenceCountLabel" text="0" visible="false">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
+            <Label fx:id="sentenceText" text="Sentence Count:" visible="false" />
+            <Label fx:id="sentenceCountLabel" text="0" visible="false" />
             <Separator layoutX="247.0" layoutY="10.0" orientation="VERTICAL" prefHeight="1.0" stylesheets="@../controllers/resources/style.css" />
-            <Label fx:id="fleschScoreText" text="Flesch Score:" visible="false">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
-            <Label fx:id="fleschScoreLabel" text="0" visible="false">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
+             <Label fx:id="fleschScoreText" text="Flesch Score:" visible="false" />
+            <Label fx:id="fleschScoreLabel" text="0" visible="false" />
          </children>
          <padding>
             <Insets left="10.0" />
