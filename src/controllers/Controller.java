@@ -382,7 +382,7 @@ public class Controller implements Initializable {
         StringTokenizer tokenizer = new StringTokenizer(textArea.getText());
         while (tokenizer.hasMoreTokens()) {
             String token = tokenizer.nextToken();
-            token = token.toLowerCase().replaceAll("[.,/#!$%^&*;:{}=\\-_`~()]", "");
+            token = token.toLowerCase().replaceAll("(\\W)|(\\d)", "");
             if (spellCheck.get(token) == null) {
                 misspelledWords.add(token);
             }
