@@ -7,7 +7,6 @@
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -25,7 +24,9 @@
 <?import javafx.scene.text.Font?>
 <?import org.fxmisc.richtext.InlineCssTextArea?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F8F9FA#F8F9FF #F8F9FA#F8F9FF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" style="-fx-background-color: #F8F9FA#F8F9FF #F8F9FA#F8F9FF;"
+            xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Controller">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
@@ -45,7 +46,7 @@
                                     <KeyCodeCombination alt="UP" code="O" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
                                  </accelerator>
                               </MenuItem>
-                          <MenuItem mnemonicParsing="false" text="Close">
+                          <MenuItem mnemonicParsing="false" onAction="#closeDocument" text="Close">
                                  <accelerator>
                                     <KeyCodeCombination alt="UP" code="W" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
                                  </accelerator>
@@ -55,6 +56,7 @@
                                     <KeyCodeCombination alt="UP" code="S" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
                                  </accelerator>
                               </MenuItem>
+                              <SeparatorMenuItem mnemonicParsing="false" />
                               <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit">
                                  <accelerator>
                                     <KeyCodeCombination alt="UP" code="Q" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
@@ -67,8 +69,6 @@
                               <MenuItem mnemonicParsing="false" onAction="#cut" text="Cut" />
                           <MenuItem mnemonicParsing="false" onAction="#copy" text="Copy" />
                               <MenuItem mnemonicParsing="false" onAction="#paste" text="Paste" />
-                              <SeparatorMenuItem mnemonicParsing="false" />
-                              <MenuItem mnemonicParsing="false" onAction="#generateText" text="Markov" />
                         </items>
                       </Menu>
                       <Menu mnemonicParsing="false" text="View">
@@ -83,32 +83,14 @@
                           <items>
                             <MenuItem mnemonicParsing="false" onAction="#checkSpelling" text="Spell Check" />
                               <MenuItem mnemonicParsing="false" onAction="#showGraph" text="Show Loop Difference" />
+                              <MenuItem mnemonicParsing="false" onAction="#generateText" text="Markov" />
                           </items>
                         </Menu>
                     </menus>
                   </MenuBar>
                   <HBox HBox.hgrow="ALWAYS" />
-                  <JFXButton alignment="CENTER" maxWidth="0.0" minHeight="2.0" minWidth="30.0" style="-fx-background-radius: 0;" text="">
-                     <graphic>
-                        <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../controllers/resources/icons8-minimize_window.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton alignment="CENTER" layoutX="560.0" layoutY="10.0" maxWidth="0.0" minHeight="2.0" minWidth="30.0" onAction="#exit" ripplerFill="#e43f3f" style="-fx-background-radius: 0;" text="">
-                     <graphic>
-                        <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../controllers/resources/icons8-close_window.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
                </children>
             </HBox>
-            <Separator prefWidth="200.0" />
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" spacing="10.0" style="-fx-background-color: #E9EAED;">
                <children>
                   <JFXButton ellipsisString="" layoutX="20.0" layoutY="15.0" onAction="#newButton" prefHeight="30.0" prefWidth="0.0" ripplerFill="#00fcfc" text="">
@@ -129,7 +111,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXButton ellipsisString="" layoutX="20.0" layoutY="13.0" onAction="#save" ripplerFill="#00fcfc" text="">
+                  <JFXButton fx:id="saveButton" ellipsisString="" layoutX="20.0" layoutY="13.0" onAction="#save" ripplerFill="#00fcfc" text="">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -139,13 +121,6 @@
                      </graphic>
                   </JFXButton>
                   <Label fx:id="saveLabel" text="All Changes Saved." textFill="#ababab" visible="false">
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../controllers/resources/icons8-checked.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
                      <font>
                         <Font size="11.0" />
                      </font>
@@ -177,41 +152,17 @@
    <bottom>
       <HBox spacing="10.0" style="-fx-background-color: #E9EAED;" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="wordCountText" contentDisplay="TOP" text="Word Count: " visible="false">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
-            <Label fx:id="wordCountLabel" text="0" visible="false">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
+            <Label fx:id="wordCountText" contentDisplay="TOP" text="Word Count: " visible="false" />
+            <Label fx:id="wordCountLabel" text="0" visible="false" />
             <Separator orientation="VERTICAL" prefHeight="1.0" stylesheets="@../controllers/resources/style.css" />
-            <Label fx:id="syllableText" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Syllable Count:" textAlignment="CENTER" visible="false">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
-            <Label fx:id="syllableCountLabel" text="0" visible="false">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
+            <Label fx:id="syllableText" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Syllable Count:" textAlignment="CENTER" visible="false" />
+            <Label fx:id="syllableCountLabel" text="0" visible="false" />
             <Separator layoutX="121.0" layoutY="10.0" orientation="VERTICAL" prefHeight="1.0" stylesheets="@../controllers/resources/style.css" />
-            <Label fx:id="sentenceText" text="Sentence Count:" visible="false">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
-            <Label fx:id="sentenceCountLabel" text="0" visible="false">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
+            <Label fx:id="sentenceText" text="Sentence Count:" visible="false" />
+            <Label fx:id="sentenceCountLabel" text="0" visible="false" />
             <Separator layoutX="247.0" layoutY="10.0" orientation="VERTICAL" prefHeight="1.0" stylesheets="@../controllers/resources/style.css" />
-            <Label fx:id="fleschScoreText" text="Flesch Score:" visible="false">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
-            <Label fx:id="fleschScoreLabel" text="0" visible="false">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
+             <Label fx:id="fleschScoreText" text="Flesch Score:" visible="false" />
+            <Label fx:id="fleschScoreLabel" text="0" visible="false" />
          </children>
          <padding>
             <Insets left="10.0" />
@@ -219,7 +170,7 @@
       </HBox>
    </bottom>
    <center>
-      <InlineCssTextArea fx:id="textArea" onKeyPressed="#statusBarListener" style="-fx-padding: 10px; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 5, 0.0 , 0 , 1 ) dropshadow( three-pass-box , rgba(0,0,0,0.5) , 5, 0.0 , 0 , 1 );" wrapText="true" BorderPane.alignment="CENTER">
+      <InlineCssTextArea fx:id="textArea" style="-fx-padding: 10px; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 5, 0.0 , 0 , 1 ) dropshadow( three-pass-box , rgba(0,0,0,0.5) , 5, 0.0 , 0 , 1 );" wrapText="true" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin></InlineCssTextArea>

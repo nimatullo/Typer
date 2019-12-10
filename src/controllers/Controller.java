@@ -1,5 +1,6 @@
 package controllers;
 
+import com.jfoenix.controls.JFXButton;
 import counters.*;
 import javafx.animation.PauseTransition;
 import javafx.concurrent.Service;
@@ -14,6 +15,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -56,6 +59,7 @@ public class Controller implements Initializable {
     @FXML ComboBox fontChoiceBox;
     @FXML String path = "";
     @FXML Label saveLabel;
+    @FXML JFXButton saveButton;
     MultiLoopCounter mlc = new MultiLoopCounter();
     static String paragraphText;
     private double x = 0, y = 0;
@@ -67,6 +71,8 @@ public class Controller implements Initializable {
     private void exit(Stage primaryStage) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Are you sure you want to exit?",ButtonType.YES,
                 ButtonType.NO);
+        Image image = new Image(getClass().getResource("resources/icons8-exit.png").toExternalForm());
+        alert.setGraphic(new ImageView(image));
         alert.setTitle("Exit");
         alert.setHeaderText("You are about to exit your project. All unsaved progress may be lost.");
         alert.showAndWait();
@@ -81,12 +87,32 @@ public class Controller implements Initializable {
                     "be lost.",
                     ButtonType.YES,
                     ButtonType.NO);
+            Image image = new Image(getClass().getResource("resources/icons8-document.png").toExternalForm());
+            alert.setGraphic(new ImageView(image));
             alert.setTitle("New");
             alert.setHeaderText("Are you sure you want to create a new document?");
             alert.showAndWait();
             if (alert.getResult() == ButtonType.YES) {
                 path = "";
-                textArea.replaceText("");
+                textArea.clear();
+            }
+        }
+    }
+
+    public void closeDocument(ActionEvent actionEvent) {
+        if (!textArea.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Any unsaved changes can be lost by closing this " +
+                    "file.",
+                    ButtonType.YES,
+                    ButtonType.NO);
+            Image image = new Image(getClass().getResource("resources/icons8-close_window_small.png").toExternalForm());
+            alert.setGraphic(new ImageView(image));
+            alert.setTitle("Close");
+            alert.setHeaderText("Are you sure you want to close the document?");
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.YES) {
+                path = "";
+                textArea.clear();
             }
         }
     }
@@ -129,6 +155,11 @@ public class Controller implements Initializable {
             BufferedWriter writer = new BufferedWriter(new FileWriter(f));
             writer.write(textContent);
             writer.close();
+            Image image = new Image(getClass().getResource("resources/icons8-save_close.png").toExternalForm());
+            ImageView imgV = new ImageView(image);
+            imgV.setFitWidth(20);
+            imgV.setFitHeight(20);
+            saveButton.setGraphic(imgV);
             saveLabel.setVisible(true);
         } catch (IOException  | NullPointerException e) {
             System.out.println("Save operation cancelled or failed.");
@@ -162,6 +193,11 @@ public class Controller implements Initializable {
     }
 
     public void updateStatusBarNumbers() {
+        Image image = new Image(getClass().getResource("resources/icons8-save.png").toExternalForm());
+        ImageView imgV = new ImageView(image);
+        imgV.setFitWidth(20);
+        imgV.setFitHeight(20);
+        saveButton.setGraphic(imgV);
         saveLabel.setVisible(false);
         getWordCount();
         getSentenceCount();

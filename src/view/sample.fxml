@@ -24,7 +24,9 @@
 <?import javafx.scene.text.Font?>
 <?import org.fxmisc.richtext.InlineCssTextArea?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F8F9FA#F8F9FF #F8F9FA#F8F9FF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" style="-fx-background-color: #F8F9FA#F8F9FF #F8F9FA#F8F9FF;"
+            xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Controller">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
@@ -44,7 +46,7 @@
                                     <KeyCodeCombination alt="UP" code="O" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
                                  </accelerator>
                               </MenuItem>
-                          <MenuItem mnemonicParsing="false" text="Close">
+                          <MenuItem mnemonicParsing="false" onAction="#closeDocument" text="Close">
                                  <accelerator>
                                     <KeyCodeCombination alt="UP" code="W" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
                                  </accelerator>
@@ -109,7 +111,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXButton ellipsisString="" layoutX="20.0" layoutY="13.0" onAction="#save" ripplerFill="#00fcfc" text="">
+                  <JFXButton fx:id="saveButton" ellipsisString="" layoutX="20.0" layoutY="13.0" onAction="#save" ripplerFill="#00fcfc" text="">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -119,13 +121,6 @@
                      </graphic>
                   </JFXButton>
                   <Label fx:id="saveLabel" text="All Changes Saved." textFill="#ababab" visible="false">
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../controllers/resources/icons8-checked.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
                      <font>
                         <Font size="11.0" />
                      </font>
