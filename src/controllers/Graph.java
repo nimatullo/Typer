@@ -27,10 +27,10 @@ public class Graph implements Initializable{
         lineChart.setTitle("One Loop vs. Multiple Loops");
 
         XYChart.Series multipleLoops = new XYChart.Series();
-        multipleLoops.setName("Multiple Loop");
+        multipleLoops.setName("Multiple Loop O(3n)");
 
         XYChart.Series oneLoop = new XYChart.Series();
-        oneLoop.setName("One Loop");
+        oneLoop.setName("One Loop O(n)");
         long [] timesMLC = getNumbersMLC(Controller.paragraphText);
         long [] timesSLC = getNumbersSLC(Controller.paragraphText);
 
@@ -59,6 +59,7 @@ public class Graph implements Initializable{
             long time = System.nanoTime();
             updateNumbersMLC(content.substring(0, div));
             times[i] = TimeUnit.MILLISECONDS.convert(System.nanoTime() - time, TimeUnit.NANOSECONDS);
+            factor += 0.1;
         }
         return times;
     }

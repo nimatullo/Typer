@@ -390,6 +390,10 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url,ResourceBundle resourceBundle) {
+        textArea.textProperty().addListener(e -> {
+            waitForFinishedInput.setOnFinished(x -> updateStatusBarNumbers());
+            waitForFinishedInput.playFromStart();
+        });
         spellCheck = new HashMap<>();
         File dictionaryTxt = new File("/Users/sherzodnimatullo/IdeaProjects/CSE 218/Typer/src/controllers/resources/dictionary.txt");
         try {
