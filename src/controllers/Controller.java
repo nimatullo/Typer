@@ -1,11 +1,8 @@
 package controllers;
 
 import com.jfoenix.controls.JFXButton;
-import counters.*;
+import counters.MultiLoopCounter;
 import javafx.animation.PauseTransition;
-import javafx.concurrent.Service;
-import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,7 +14,6 @@ import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
@@ -26,7 +22,6 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.fxmisc.richtext.InlineCssTextArea;
 
-import javax.swing.border.Border;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -37,6 +32,7 @@ import java.text.NumberFormat;
 import java.util.*;
 
 public class Controller implements Initializable {
+    @FXML BorderPane pane;
     @FXML CheckBox displayCounterCheckBox;
     @FXML InlineCssTextArea textArea;
     @FXML MenuItem newMenuItem;
@@ -394,10 +390,6 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url,ResourceBundle resourceBundle) {
-        textArea.textProperty().addListener(e -> {
-            waitForFinishedInput.setOnFinished(x -> updateStatusBarNumbers());
-            waitForFinishedInput.playFromStart();
-        });
         spellCheck = new HashMap<>();
         File dictionaryTxt = new File("/Users/sherzodnimatullo/IdeaProjects/CSE 218/Typer/src/controllers/resources/dictionary.txt");
         try {

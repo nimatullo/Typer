@@ -24,9 +24,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.fxmisc.richtext.InlineCssTextArea?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-            prefWidth="600.0" style="-fx-background-color: #F8F9FA#F8F9FF #F8F9FA#F8F9FF;"
-            xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Controller">
+<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #F8F9FA#F8F9FF #F8F9FA#F8F9FF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Controller">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
@@ -93,6 +91,34 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" spacing="10.0" style="-fx-background-color: #E9EAED;">
                <children>
+                  <JFXButton ellipsisString="" layoutX="20.0" layoutY="15.0" onAction="#cut" prefHeight="30.0" prefWidth="0.0" ripplerFill="#00fcfc" text="">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../controllers/resources/icons8-cut.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton ellipsisString="" layoutX="20.0" layoutY="15.0" onAction="#copy" prefHeight="30.0" prefWidth="0.0" ripplerFill="#00fcfc" text="">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../controllers/resources/icons8-copy.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton ellipsisString="" layoutX="68.0" layoutY="15.0" onAction="#paste" prefHeight="30.0" prefWidth="0.0" ripplerFill="#00fcfc" text="">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../controllers/resources/icons8-paste.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <Separator orientation="VERTICAL" prefHeight="200.0" />
                   <JFXButton ellipsisString="" layoutX="20.0" layoutY="15.0" onAction="#newButton" prefHeight="30.0" prefWidth="0.0" ripplerFill="#00fcfc" text="">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
