@@ -101,7 +101,7 @@ public class Controller implements Initializable {
                     "file.",
                     ButtonType.YES,
                     ButtonType.NO);
-            Image image = new Image(getClass().getResource("resources/icons8-close_window_small.png").toExternalForm());
+            Image image = new Image(getClass().getResource("resources/icons8-close_window.png").toExternalForm());
             alert.setGraphic(new ImageView(image));
             alert.setTitle("Close");
             alert.setHeaderText("Are you sure you want to close the document?");
@@ -433,5 +433,9 @@ public class Controller implements Initializable {
         area.setEditable(false);
         alert.getDialogPane().setContent(area);
         alert.showAndWait();
+    }
+
+    public void selectAll(ActionEvent actionEvent) {
+        textArea.selectAll();
     }
 }

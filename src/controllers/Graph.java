@@ -27,10 +27,10 @@ public class Graph implements Initializable{
         lineChart.setTitle("One Loop vs. Multiple Loops");
 
         XYChart.Series multipleLoops = new XYChart.Series();
-        multipleLoops.setName("Multiple Loop O(3n)");
+        multipleLoops.setName("Multiple Loop");
 
         XYChart.Series oneLoop = new XYChart.Series();
-        oneLoop.setName("One Loop O(n)");
+        oneLoop.setName("One Loop");
         long [] timesMLC = getNumbersMLC(Controller.paragraphText);
         long [] timesSLC = getNumbersSLC(Controller.paragraphText);
 
